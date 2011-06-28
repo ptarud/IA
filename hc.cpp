@@ -8,7 +8,7 @@
 #include "hc.h"
 #include <cstdio>
 #include <cstdlib>
-#define MOVES 4
+#define MOVES 5
 
 using namespace std;
 

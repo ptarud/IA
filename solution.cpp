@@ -544,7 +544,9 @@ void solution::init2(){
 }
 
 void solution::partialSwapTeams(int team1, int team2, int round){
-    bool* swaprounds=new bool[2*(N-1)+K];
+    bool* swaprounds=new bool   [2*(N-1)+K];
+
+    if(team1<1 || team1>N || team2<1 || team2>N || round<1 || round>2*(N-1)+K) cout << "ERROR EN PSWAPteams"<< endl;
 
     for(int i=0;i<2*(N-1)+K;i++){
         swaprounds[i]=false;
@@ -552,8 +554,8 @@ void solution::partialSwapTeams(int team1, int team2, int round){
     swaprounds[round-1]=true;
 
     //Identificación de rondas para swap
-    searchRoundSwap(sol[team1-1][round-1],team2,team1,swaprounds);
-    searchRoundSwap(sol[team2-1][round-1],team1,team2,swaprounds);
+    if(sol[team1-1][round-1]!=0) searchRoundSwap(sol[team1-1][round-1],team2,team1,swaprounds);
+    if(sol[team2-1][round-1]!=0) searchRoundSwap(sol[team2-1][round-1],team1,team2,swaprounds);
 
     //Haciendo swap
     for(int i=0;i<2*(N-1)+K;i++){
@@ -566,31 +568,33 @@ void solution::partialSwapTeams(int team1, int team2, int round){
     swaprounds=NULL;
 
 }
-
 //Busca las rondas para hacer swap para el partialSwapTeams
 // team: equipo con localidad (signo) que hay que buscar
 // dteam: equipo de  destino sin signo (swapped)
 // steam: equipo swap sin signo (swapped)
 void solution::searchRoundSwap(int team, int dteam, int steam, bool*& swapRounds){
     int searchteam=team;
+
+    if(dteam<1 || dteam>N || steam<1 || steam>N) cout << "ERROR EN cearchtound"<< endl;
     for(int i=0;i<2*(N-1)+K;i++){
         if(!swapRounds[i] && sol[dteam-1][i]==searchteam){
             swapRounds[i]=true;
-            searchRoundSwap(sol[steam-1][i],dteam,steam,swapRounds);
+            if(sol[steam-1][i]!=0) searchRoundSwap(sol[steam-1][i],dteam,steam,swapRounds);
         }
     }
 
 }
 //Cambia partidos en una ronda para partialSwapTeams
 void solution::swapRound2(int team1, int team2, int round){
+    if(team1<1 || team1>N || team2<1 || team2>N || round<1 || round>2*(N-1)+K) cout << "ERROR EN swapround"<< endl;
     if(team1!=team2){
         int steam1=sol[team1-1][round-1];
         int steam2=sol[team2-1][round-1];
         sol[team1-1][round-1]=steam2;
         sol[team2-1][round-1]=steam1;
 
-        sol[abs(steam2)-1][round-1]=(steam2/abs(steam2))*(-1)*team1;
-        sol[abs(steam1)-1][round-1]=(steam1/abs(steam1))*(-1)*team2;
+        if(steam2!=0) sol[abs(steam2)-1][round-1]=(steam2/abs(steam2))*(-1)*team1;
+        if(steam1!=0) sol[abs(steam1)-1][round-1]=(steam1/abs(steam1))*(-1)*team2;
     }
 
 }
