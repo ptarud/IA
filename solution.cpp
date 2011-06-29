@@ -303,7 +303,11 @@ void solution::swapByes(int t1, int t2){
                         int aux;
                         aux = sol[t1][j];
                         sol[t1][j] = sol[t1][k];
-                        sol[t1][k] = aux;
+                        sol[t1][k] = aux;for(int i = 0; i < N; i++){
+        for(int j = 0; j < 2*(N-1)+K; j++){
+            sol[i][j] = -(N+100);
+        }
+    }
                         aux = sol[t2][j];
                         sol[t2][j] = sol[t2][k];
                         sol[t2][k] = aux;
@@ -413,6 +417,12 @@ void solution::assign(int i, int j, int val){
 }
 
 void solution::init(){
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < 2*(N-1)+K; j++){
+            sol[i][j] = -(N+100);
+        }
+    }
+    
     int polygon[N-1];
     int aux[N-1];
     int n = (int)rand()%N +1;

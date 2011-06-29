@@ -8,6 +8,7 @@
 #include "hc.h"
 #include <cstdio>
 #include <cstdlib>
+#include <vector>
 #define MOVES 5
 
 using namespace std;
@@ -25,11 +26,31 @@ void hc::setIterations(int iterations){
     this->iterations = iterations;
 }
 
-void hc::run(){
+void hc::run(int restarts){
     
     g_best = new solution(*sol);
-    bool mejore = false;
+    vector<solution> mejores_soluciones;
+    vector<solution> peores_soluciones;
+    bool mejore;
+    int iters = 0;
+    int resets = 0;
+    int maxIters = 20   ;
+    
     for(int t = 0; t < iterations; t++){
+        mejore = false;
+        if(iters == maxIters && resets <= restarts){ //hago un restart
+            resets++;
+            float prob = (float)rand()/RAND_MAX;
+            if(prob <= 0.33 && prob >= 0){
+                int index = (int)rand()%mejores_soluciones.size();
+                sol->copy(mejores_soluciones.at(index));
+            }else if(prob > 0.33 && prob <= 0.66){
+                int index = (int)rand()%peores_soluciones.size();
+                sol->copy(peores_soluciones.at(index));
+            }else if(prob > 0.66){
+                sol->init();
+            }
+        }
         /*elijo aleatoreamente movimiento que aplicaré para crear vecindario*/
         int move = (int)rand()%(MOVES+1);
         /*aplico movimiento*/
@@ -43,14 +64,18 @@ void hc::run(){
                         if(sol2.isFeasible()){
                             /*si es mejor ó si es igual, pero con mejor fitness */
                             if(sol2.getDistance() < sol->getDistance() || ( sol2.getDistance() == sol->getDistance() && sol2.getFitness() < sol->getFitness() )){
+                                mejore = true; 
+                                iters = 0;
+                                mejores_soluciones.push_back(sol2);
                                 sol->copy(sol2);
-                                sol->printSolution();
                                 /*paro los for*/
                                 t1 = sol->getN();
                                 t2 = sol->getN();
                                 if(sol2.getDistance() < g_best->getDistance()){
                                     g_best->copy(sol2);
                                 }
+                            }else if(sol2.getDistance() > sol->getDistance()){ //soy peor
+                                peores_soluciones.push_back(sol2);
                             }
                         }
                     }
@@ -65,15 +90,19 @@ void hc::run(){
                     if(r1 != r2){
                         sol2.swapRounds(r1,r2);
                         if(sol2.isFeasible()){
-                            if(sol2.getDistance() < sol->getDistance() || ( sol2.getDistance() == sol->getDistance() && sol2.getFitness() < sol->getFitness() )){
+                            if(sol2.getDistance() < sol->getDistance() || ( sol2.getDistance() == sol->getDistance() && sol2.getFitness() < sol->getFitness() )){ //soy mejor
+                                mejore = true; 
+                                iters = 0;
+                                mejores_soluciones.push_back(sol2);
                                 sol->copy(sol2);
-                                sol->printSolution();
                                 /*paro los for*/
                                 r1 = 2*(sol->getN()-1)+sol->getK();
                                 r2 = 2*(sol->getN()-1)+sol->getK();
                                 if(sol2.getDistance() < g_best->getDistance()){
                                     g_best->copy(sol2);
                                 }
+                            }else if(sol2.getDistance() > sol->getDistance()){ //soy peor
+                                peores_soluciones.push_back(sol2);
                             }
                         }
                     }
@@ -89,14 +118,18 @@ void hc::run(){
                             sol2.swapByes(t1,t2);
                             if(sol2.isFeasible()){
                                 if(sol2.getDistance() < sol->getDistance() || ( sol2.getDistance() == sol->getDistance() && sol2.getFitness() < sol->getFitness() )){
+                                    mejore = true; 
+                                    iters = 0;
+                                    mejores_soluciones.push_back(sol2);
                                     sol->copy(sol2);
-                                    sol->printSolution();
                                     /*paro los for*/
                                     t1 = sol->getN();
                                     t2 = sol->getN();
                                     if(sol2.getDistance() < g_best->getDistance()){
                                         g_best->copy(sol2);
                                     }
+                                }else if(sol2.getDistance() > sol->getDistance()){ //soy peor
+                                    peores_soluciones.push_back(sol2);
                                 }
                             }
                         }
@@ -113,9 +146,11 @@ void hc::run(){
                         if(r1 != r2){
                             sol2.partialSwapRounds(t1,r1,r2);
                             if(sol2.isFeasible()){
-                               if(sol2.getDistance() < sol->getDistance() || ( sol2.getDistance() == sol->getDistance() && sol2.getFitness() < sol->getFitness() )){
+                                if(sol2.getDistance() < sol->getDistance() || ( sol2.getDistance() == sol->getDistance() && sol2.getFitness() < sol->getFitness() )){
+                                    mejore = true; 
+                                    iters = 0;
+                                    mejores_soluciones.push_back(sol2); 
                                     sol->copy(sol2);
-                                    sol->printSolution();
                                     /*paro los for*/
                                     t1 = sol->getN();
                                     r1 = 2*(sol->getN()-1)+sol->getK();
@@ -123,7 +158,9 @@ void hc::run(){
                                     if(sol2.getDistance() < g_best->getDistance()){
                                         g_best->copy(sol2);
                                     }
-                               }
+                                }else if(sol2.getDistance() > sol->getDistance()){ //soy peor
+                                    peores_soluciones.push_back(sol2);
+                                }
                             }
                         }
                     } 
@@ -139,14 +176,18 @@ void hc::run(){
                        if(sol2.isFeasible()){
                             /*si es mejor ó si es igual, pero con mejor fitness */
                             if(sol2.getDistance() < sol->getDistance() || ( sol2.getDistance() == sol->getDistance() && sol2.getFitness() < sol->getFitness() )){
+                                mejore = true; 
+                                iters = 0;
+                                mejores_soluciones.push_back(sol2);
                                 sol->copy(sol2);
-                                sol->printSolution();
                                 /*paro los for*/
                                 t1 = sol->getN();
                                 t2 = sol->getN();
                                 if(sol2.getDistance() < g_best->getDistance()){
                                     g_best->copy(sol2);
                                 }
+                            }else if(sol2.getDistance() > sol->getDistance()){ //soy peor
+                                peores_soluciones.push_back(sol2);
                             }
                         }
                     }
@@ -161,10 +202,12 @@ void hc::run(){
                         if(t1 != t2){
                            sol2.partialSwapTeams(t1,t2,r);
                            if(sol2.isFeasible()){
-                                /*si es mejor ó si es igual, pero con mejor fitness */
+                               mejore = true; 
+                               iters = 0; 
+                               /*si es mejor ó si es igual, pero con mejor fitness */
                                 if(sol2.getDistance() < sol->getDistance() || ( sol2.getDistance() == sol->getDistance() && sol2.getFitness() < sol->getFitness() )){
+                                    mejores_soluciones.push_back(sol2);
                                     sol->copy(sol2);
-                                    sol->printSolution();
                                     /*paro los for*/
                                     t1 = sol->getN()+1;
                                     t2 = sol->getN()+1;
@@ -172,15 +215,20 @@ void hc::run(){
                                     if(sol2.getDistance() < g_best->getDistance()){
                                         g_best->copy(sol2);
                                     }
+                                }else if(sol2.getDistance() > sol->getDistance()){ //soy peor
+                                    peores_soluciones.push_back(sol2);
                                 }
                             }
                         }
                     }
                 } 
             }
-        
+        }
+        if(!mejore){
+            iters++;
         }
     }
+    
 }
 
 void hc::setInitSol(solution *sol){
