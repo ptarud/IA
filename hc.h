@@ -20,9 +20,10 @@ public:
     void setIterations(int);
     void run();
     void setInitSol(solution*);
+    solution* getGBest();
 private:
     int iterations;
-    solution *sol;;
+    solution *sol, *g_best;
 };
 
 #endif	/* HC_H */

@@ -38,7 +38,11 @@ int main(int argc, char** argv) {
         algoritmo.setInitSol(solucion);
         algoritmo.setIterations(atoi(argv[7]));
         algoritmo.run();
+        printf("SOL FINAL\n");
+        solution *gbest = algoritmo.getGBest();
+        gbest->printSolution();
         
+        delete gbest;
         delete solucion;
         return 1;
     }else{

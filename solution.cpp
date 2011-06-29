@@ -546,8 +546,6 @@ void solution::init2(){
 void solution::partialSwapTeams(int team1, int team2, int round){
     bool* swaprounds=new bool   [2*(N-1)+K];
 
-    if(team1<1 || team1>N || team2<1 || team2>N || round<1 || round>2*(N-1)+K) cout << "ERROR EN partialSwapTeams"<< endl;
-
     for(int i=0;i<2*(N-1)+K;i++){
         swaprounds[i]=false;
     }
@@ -575,7 +573,6 @@ void solution::partialSwapTeams(int team1, int team2, int round){
 void solution::searchRoundSwap(int team, int dteam, int steam, bool*& swapRounds){
     int searchteam=team;
 
-    if(dteam<1 || dteam>N || steam<1 || steam>N) cout << "ERROR EN cearchtound"<< endl;
     for(int i=0;i<2*(N-1)+K;i++){
         if(!swapRounds[i] && sol[dteam-1][i]==searchteam){
             swapRounds[i]=true;
@@ -586,7 +583,7 @@ void solution::searchRoundSwap(int team, int dteam, int steam, bool*& swapRounds
 }
 //Cambia partidos en una ronda para partialSwapTeams
 void solution::swapRound2(int team1, int team2, int round){
-    if(team1<1 || team1>N || team2<1 || team2>N || round<1 || round>2*(N-1)+K) cout << "ERROR EN swapround"<< endl;
+    
     if(team1!=team2){
         int steam1=sol[team1-1][round-1];
         int steam2=sol[team2-1][round-1];

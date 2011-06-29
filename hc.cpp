@@ -26,6 +26,9 @@ void hc::setIterations(int iterations){
 }
 
 void hc::run(){
+    
+    g_best = new solution(*sol);
+    bool mejore = false;
     for(int t = 0; t < iterations; t++){
         /*elijo aleatoreamente movimiento que aplicaré para crear vecindario*/
         int move = (int)rand()%(MOVES+1);
@@ -37,7 +40,7 @@ void hc::run(){
                     solution sol2(*sol);
                     if(t1 != t2){
                         sol2.swapHomes(t1,t2);
-                       if(sol2.isFeasible()){
+                        if(sol2.isFeasible()){
                             /*si es mejor ó si es igual, pero con mejor fitness */
                             if(sol2.getDistance() < sol->getDistance() || ( sol2.getDistance() == sol->getDistance() && sol2.getFitness() < sol->getFitness() )){
                                 sol->copy(sol2);
@@ -45,6 +48,9 @@ void hc::run(){
                                 /*paro los for*/
                                 t1 = sol->getN();
                                 t2 = sol->getN();
+                                if(sol2.getDistance() < g_best->getDistance()){
+                                    g_best->copy(sol2);
+                                }
                             }
                         }
                     }
@@ -65,6 +71,9 @@ void hc::run(){
                                 /*paro los for*/
                                 r1 = 2*(sol->getN()-1)+sol->getK();
                                 r2 = 2*(sol->getN()-1)+sol->getK();
+                                if(sol2.getDistance() < g_best->getDistance()){
+                                    g_best->copy(sol2);
+                                }
                             }
                         }
                     }
@@ -85,6 +94,9 @@ void hc::run(){
                                     /*paro los for*/
                                     t1 = sol->getN();
                                     t2 = sol->getN();
+                                    if(sol2.getDistance() < g_best->getDistance()){
+                                        g_best->copy(sol2);
+                                    }
                                 }
                             }
                         }
@@ -108,6 +120,9 @@ void hc::run(){
                                     t1 = sol->getN();
                                     r1 = 2*(sol->getN()-1)+sol->getK();
                                     r2 = 2*(sol->getN()-1)+sol->getK();
+                                    if(sol2.getDistance() < g_best->getDistance()){
+                                        g_best->copy(sol2);
+                                    }
                                }
                             }
                         }
@@ -129,6 +144,9 @@ void hc::run(){
                                 /*paro los for*/
                                 t1 = sol->getN();
                                 t2 = sol->getN();
+                                if(sol2.getDistance() < g_best->getDistance()){
+                                    g_best->copy(sol2);
+                                }
                             }
                         }
                     }
@@ -151,6 +169,9 @@ void hc::run(){
                                     t1 = sol->getN()+1;
                                     t2 = sol->getN()+1;
                                     r = 2*(sol->getN()-1)+sol->getK()+1;
+                                    if(sol2.getDistance() < g_best->getDistance()){
+                                        g_best->copy(sol2);
+                                    }
                                 }
                             }
                         }
@@ -166,3 +187,6 @@ void hc::setInitSol(solution *sol){
     this->sol = sol;
 }
 
+solution* hc::getGBest(){
+    return g_best;
+}
