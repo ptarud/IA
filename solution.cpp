@@ -425,7 +425,7 @@ void solution::init(){
     
     int polygon[N-1];
     int aux[N-1];
-    int n = (int)rand()%N +1;
+    int n = (int)(rand()%N)+1;
     
     int count = 1;
     for(int i = 0; i < N-1; i++){
