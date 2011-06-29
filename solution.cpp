@@ -546,7 +546,7 @@ void solution::init2(){
 void solution::partialSwapTeams(int team1, int team2, int round){
     bool* swaprounds=new bool   [2*(N-1)+K];
 
-    if(team1<1 || team1>N || team2<1 || team2>N || round<1 || round>2*(N-1)+K) cout << "ERROR EN PSWAPteams"<< endl;
+    if(team1<1 || team1>N || team2<1 || team2>N || round<1 || round>2*(N-1)+K) cout << "ERROR EN partialSwapTeams"<< endl;
 
     for(int i=0;i<2*(N-1)+K;i++){
         swaprounds[i]=false;
