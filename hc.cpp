@@ -42,11 +42,15 @@ void hc::run(int restarts){
             resets++;
             float prob = (float)rand()/RAND_MAX;
             if(prob <= 0.33 && prob >= 0){
-                int index = (int)rand()%mejores_soluciones.size();
-                sol->copy(mejores_soluciones.at(index));
+                if(mejores_soluciones.size() > 0){
+                    int index = (int)rand()%mejores_soluciones.size();
+                    sol->copy(mejores_soluciones.at(index));
+                }
             }else if(prob > 0.33 && prob <= 0.66){
-                int index = (int)rand()%peores_soluciones.size();
-                sol->copy(peores_soluciones.at(index));
+                if(peores_soluciones.size() > 0){
+                    int index = (int)rand()%peores_soluciones.size();
+                    sol->copy(peores_soluciones.at(index));
+                }
             }else if(prob > 0.66){
                 sol->init();
             }
