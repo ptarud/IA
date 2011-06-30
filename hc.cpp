@@ -38,21 +38,34 @@ void hc::run(int restarts){
     
     for(int t = 0; t < iterations; t++){
         mejore = false;
+        if(t%(int)(iterations*0.2) == 0){
+            mejores_soluciones.clear();
+            peores_soluciones.clear();
+        }
         if(iters == maxIters && resets <= restarts){ //hago un restart
             resets++;
-            float prob = (float)rand()/RAND_MAX;
+            float prob;
+            if(mejores_soluciones.size() > 0 && peores_soluciones.size() > 0){
+                prob = (float)rand()/RAND_MAX;
+            }else{
+                prob = 1;
+            }
+            
             if(prob <= 0.33 && prob >= 0){
                 if(mejores_soluciones.size() > 0){
                     int index = (int)rand()%mejores_soluciones.size();
                     sol->copy(mejores_soluciones.at(index));
+                    iters = 0;
                 }
             }else if(prob > 0.33 && prob <= 0.66){
                 if(peores_soluciones.size() > 0){
                     int index = (int)rand()%peores_soluciones.size();
                     sol->copy(peores_soluciones.at(index));
+                    iters = 0;
                 }
             }else if(prob > 0.66){
                 sol->init();
+                iters = 0;
             }
         }
         /*elijo aleatoreamente movimiento que aplicaré para crear vecindario*/
