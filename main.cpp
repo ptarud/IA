@@ -29,9 +29,9 @@ int main(int argc, char** argv) {
         solucion->setLU(atoi(argv[3]),atoi(argv[4]));
         solucion->setBO(atoi(argv[5]),atoi(argv[6]));
         solucion->init();
-        printf("HILL CLIMBING Alguna Mejora\n");
+        printf("HILL CLIMBING Alguna Mejora con restarts\n");
         printf("\tParametros:\n");
-        printf("\t\tK = %d, L = %d, U = %d, B = %d, O = %d, Iteraciones = %d, Restarts = %d\n\n",atoi(argv[2]),atoi(argv[3]),atoi(argv[4]),atoi(argv[5]),atoi(argv[6]),atoi(argv[7]),atoi(argv[8]));
+        printf("\t\tN = %d, K = %d, L = %d, U = %d, B = %d, O = %d, Instancia = %s, Iteraciones = %d, maxIters = %d\n\n",solucion->getN(),atoi(argv[2]),atoi(argv[3]),atoi(argv[4]),atoi(argv[5]),atoi(argv[6]),argv[9],atoi(argv[7]),atoi(argv[8]));
         //printf("SOLUCION INICIAL\n");
         //solucion->printSolution();
         

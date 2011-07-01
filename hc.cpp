@@ -26,15 +26,14 @@ void hc::setIterations(int iterations){
     this->iterations = iterations;
 }
 
-void hc::run(int restarts){
+void hc::run(int maxIters){
     
     g_best = new solution(*sol);
     vector<solution> mejores_soluciones;
     vector<solution> peores_soluciones;
     bool mejore;
     int iters = 0;
-    int resets = 0;
-    int maxIters = 20   ;
+    //int resets = 0;
     
     for(int t = 0; t < iterations; t++){
         mejore = false;
@@ -42,13 +41,13 @@ void hc::run(int restarts){
             mejores_soluciones.clear();
             peores_soluciones.clear();
         }
-        if(iters == maxIters && resets <= restarts){ //hago un restart
-            resets++;
+        if(iters == maxIters){ //hago un restart
+            
             float prob;
             if(mejores_soluciones.size() > 0 && peores_soluciones.size() > 0){
                 prob = (float)rand()/RAND_MAX;
             }else{
-                prob = 1;
+                prob = 1; //obligo a reiniciarse
             }
             
             if(prob <= 0.33 && prob >= 0){
