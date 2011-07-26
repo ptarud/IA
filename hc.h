@@ -18,7 +18,7 @@ public:
     hc(const hc& orig);
     virtual ~hc();
     void setIterations(int);
-    void run(int);
+    void run();
     void setInitSol(solution*);
     solution* getGBest();
 private:

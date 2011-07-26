@@ -26,23 +26,17 @@ void hc::setIterations(int iterations){
     this->iterations = iterations;
 }
 
-void hc::run(int maxIters){
-    
+void hc::run(){
+    int maxIters = 10;
     g_best = new solution(*sol);
     vector<solution> mejores_soluciones;
     vector<solution> peores_soluciones;
     bool mejore;
     int iters = 0;
-    //int resets = 0;
-    
+   
     for(int t = 0; t < iterations; t++){
         mejore = false;
-        if(t%(int)(iterations*0.2) == 0){
-            mejores_soluciones.clear();
-            peores_soluciones.clear();
-        }
         if(iters == maxIters){ //hago un restart
-            
             float prob;
             if(mejores_soluciones.size() > 0 && peores_soluciones.size() > 0){
                 prob = (float)rand()/RAND_MAX;
@@ -66,6 +60,9 @@ void hc::run(int maxIters){
                 sol->init();
                 iters = 0;
             }
+            /*limpio los "historiales"*/
+            mejores_soluciones.clear();
+            peores_soluciones.clear();
         }
         /*elijo aleatoreamente movimiento que aplicaré para crear vecindario*/
         int move = (int)rand()%(MOVES+1);
