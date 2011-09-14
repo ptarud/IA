@@ -1,0 +1,34 @@
+sabes, estaba pensando como desestancar el hill climbing
+pense en 2 
+ir guardando en una lista cada vez q mejoro guardo esa en una lista
+luego si me estanco, guardo la ultima(cuando me estanque) en un gBest para no perderla
+y ahi volver a un elemento de esa lista q te nombre aleatoriamente
+y ahi seguir haciendo movimientos
+o simplemente reiniciar el algoritmo
+o hacer una combinacion de ambas 
+xD
+
+ah suena interesante
+deberias probarlo 
+
+18:50
+ahha 
+dale
+lo probare
+
+o tambien lo q se me ocurrio tb
+ir incluyendo en esa lista
+cuando el wn baja
+onda con peores soluciones
+y en base a esa solucion
+hacer el restart
+quizas si el wn va a una solucion muy maola en su vecindad
+quizas dps al laito ta una full wena pos
+jajaja
+y como es hill climbing, el wn nunca pasaria por ahi...
+ay no se... tantas cosas q a uno se le ocurren :$
+
+jjeje sipos, hay hartas opciones
+^^
+
+

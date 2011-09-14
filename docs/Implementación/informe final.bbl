@@ -1,0 +1,138 @@
+\begin{thebibliography}{}
+
+\bibitem[A.~Anagnostopoulos and Vergados, 2003]{RSGD:16}
+A.~Anagnostopoulos, L.~Michel, P. V.~H. and Vergados, Y. (2003).
+\newblock A simulated annealing approach to the traveling tournament problem.
+\newblock {\em International Workshop on Integration of AI and OR Techniques,
+  Montreal}.
+
+\bibitem[A.~Lim and Zhang, 2006]{RSGD:20}
+A.~Lim, B.~R. and Zhang, X. (2006).
+\newblock A simulated annealing and hill-climbing algorithm for the traveling
+  tournament problem.
+\newblock {\em Electronic Notes in Discrete Mathematics}, pages 1459--1478.
+
+\bibitem[Bao, 2006]{RSGD:2}
+Bao, R. (2006).
+\newblock Time relaxed round robin tournament and the nba scheduling problem.
+\newblock {\em Dissertions}, pages 1--138.
+
+\bibitem[Bean and Birge, 1980]{RSGD:8}
+Bean, J. and Birge, J. (1980).
+\newblock Reducing travelling costs and player fatigue in the national
+  basketball association.
+\newblock {\em Interfaces}, pages 98--102.
+
+\bibitem[Campbell and Chen, 1976]{RSGD:7}
+Campbell, R. and Chen, D. (1976).
+\newblock A minimum distance basketball scheduling problem.
+\newblock {\em Management Science in Sports, Studies in the Management
+  Sciences}, pages 15--26.
+
+\bibitem[Costa, 1995]{RSGD:10}
+Costa, D. (1995).
+\newblock An evolutionary tabu search algorithm and the nhl scheduling problem.
+\newblock {\em Information Systems and Operational Research}, pages 161--178.
+
+\bibitem[de~Werra, 1981]{RSGD:5}
+de~Werra, D. (1981).
+\newblock Scheduling in sports.
+\newblock {\em Studies on Graphs and Discrete Programming}, pages 381--395.
+
+\bibitem[de~Werra, 1988]{RSGD:6}
+de~Werra, D. (1988).
+\newblock Some models of graphs forscheduling sports competitions.
+\newblock {\em Discrete Applied Mathematics}, pages 47--65.
+
+\bibitem[Fleurent and lA. Ferland, 1993]{RSGD:9}
+Fleurent, C. and lA. Ferland (1993).
+\newblock Allocating games for the nhl using integer programming.
+\newblock {\em Operations Research}, pages 649--654.
+
+\bibitem[Gaspero and Schaerf, 2007]{RSGD:21}
+Gaspero, L.~D. and Schaerf, A. (2007).
+\newblock A composite-neighborhood tabu search approach to the traveling
+  tournament problem.
+\newblock {\em Journal of Heuristics volume 13 pages 189-207, Kluwer Academic
+  Publishers}.
+
+\bibitem[Glover, 1989]{RSGD:11}
+Glover, F. (1989).
+\newblock Tabu search. part i.
+\newblock {\em ORSA Journal on Computing}, pages 190--206.
+
+\bibitem[Hentenryck and Vergados, 2007]{RSGD:22}
+Hentenryck, P.~V. and Vergados, Y. (2007).
+\newblock Population-based simulated annealing for traveling tournaments.
+\newblock {\em Proceedings of the 22nd national conference on Artificial
+  intelligence}, pages 267--272.
+
+\bibitem[Henz, 2004]{RSGD:18}
+Henz, M. (2004).
+\newblock Playing with constraint programming and large neighborhood search for
+  traveling tournaments.
+\newblock {\em The International Series of Conferences on the Practice and
+  Theory of Automated Timetabling}, pages 23--32.
+
+\bibitem[J.H.~Lee and Lee, 2006]{RSGD:17}
+J.H.~Lee, Y.~L. and Lee, Y. (2006).
+\newblock Mathematical modeling and tabu search heuristic for the traveling
+  tournament problem.
+\newblock {\em Lecture Notes in ComputerScknce}, pages 875--884.
+
+\bibitem[K~.~Easton, 2001a]{RSGD:14}
+K~.~Easton, G.L.~Nemhauser, M.~T. (2001a).
+\newblock Solving the traveling tournament problem: a combined integer
+  programming and constraint programming approach.
+\newblock {\em Lecture Notes in Computer Science}, pages 580--585.
+
+\bibitem[K~.~Easton, 2001b]{RSGD:1}
+K~.~Easton, G.L.~Nemhauser, M.~T. (2001b).
+\newblock The traveling tournament problem descriptions and benchmarks from
+  http://mat.gsia.cmu.edu/tourn.
+\newblock {\em Lecture Notes in Computer Science}, pages 580--585.
+
+\bibitem[Kendall and Berghe, 2007]{RSGD:23}
+Kendall, G. and Berghe, V. (2007).
+\newblock An ant based hyper-heuristic for the traveling tournament.
+\newblock {\em In proceedings of IEEE Symposium of Computational Intelligence
+  in Scheduling}, pages 19--26.
+
+\bibitem[Ribeiro and Urrutia, ]{RSGD:24}
+Ribeiro, C.~C. and Urrutia, S.
+\newblock Heuristics for the mirrored traveling tournament problem.
+
+\bibitem[Schreuder, 1980]{RSGD:4}
+Schreuder, J. (1980).
+\newblock Constructing timetables for sport competitions.
+\newblock {\em Mathematical Programming Study}, pages 58--67.
+
+\bibitem[T.~Benoist and Rottembourg, 2001]{RSGD:15}
+T.~Benoist, F.~L. and Rottembourg, B. (2001).
+\newblock Lagrange relaxation and constraint programming collaborative schemes
+  for traveling tournament problems.
+\newblock {\em International Workshop on Integration of AI and OR Techniques,
+  Ashford, Kent UK}, pages 580--585.
+
+\bibitem[Trick and Bao, 2011]{RSGD:3}
+Trick and Bao (January 17, 2011).
+\newblock Challenge traveling tournament instances (relaxed) from
+  http://mat.gsia.cmu.edu/tourn/relaxed/.
+
+\bibitem[Urrutia and Ribeiro, 2004]{RSGD:19}
+Urrutia, S. and Ribeiro, C. (2004).
+\newblock Minimizing travels by maximizing breaks in round robin tournament
+  schedules.
+\newblock {\em European Journal ofOperational Research,}, pages 227--233.
+
+\bibitem[Vecchi, 1983]{RSGD:12}
+Vecchi, S. K. C. D. G. M.~P. (May 13, 1983).
+\newblock Optimization by simulated annealing.
+\newblock {\em Science, New Series, Vol. 220, No. 4598}, pages 671--680.
+
+\bibitem[Wright, 2006]{RSGD:13}
+Wright, M. (2006).
+\newblock Scheduling fixtures for basketball new zealand.
+\newblock {\em Computers \& Operations Research}, pages 1875--1893.
+
+\end{thebibliography}

@@ -1,0 +1,459 @@
+\documentclass[letter, 10pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[top=3cm,bottom=3cm,left=3.5cm,right=3.5cm,footskip=1.5cm,headheight=1.5cm,headsep=.5cm,textheight=3cm]{geometry}
+
+
+\begin{document}
+\title{Inteligencia Artificial \\ \begin{Large}Informe Final: Problema RTTP con Hill Climbing alguna mejora\end{Large}}
+\author{Paulo Tarud C  2523034-5}
+\date{\today}
+\maketitle
+
+
+%--------------------No borrar esta sección--------------------------------%
+\section*{Evaluación}
+
+\begin{tabular}{ll}
+Mejoras 1ra Entrega (10\%): & \underline{\hspace{2cm}} \\
+Código Fuente (10\%):  & \underline{\hspace{2cm}} \\
+Representación (15\%):  & \underline{\hspace{2cm}} \\
+Descripción del algoritmo (20\%):  & \underline{\hspace{2cm}} \\
+Experimentos (10\%): &  \underline{\hspace{2cm}}\\
+Resultados (10\%): &  \underline{\hspace{2cm}}\\
+Conclusiones (20\%): &  \underline{\hspace{2cm}}\\
+Bibliografía (5\%): & \underline{\hspace{2cm}}\\
+ &  \\
+\textbf{Nota Final (100)}:   & \underline{\hspace{2cm}}
+\end{tabular}
+%---------------------------------------------------------------------------%
+
+\begin{abstract}
+Resumen del informe en no más de 10 líneas.
+\end{abstract}
+
+\section{Introducción}
+%Una explicación breve de lo que consiste el informe. Introducción al problema que se estudiará, motivación.
+En muchos países, los deportes proveen muchos ingresos además de entretenimiento. Maximizar los ingresos de una liga deportiva es el interés mas grande, no sólo para
+los equipos, si no también para las comunidades locales. Hay muchos factores que afectan los ingresos de las ligas deportivas, uno de éstos es la programación horaria. \\
+
+La mayor parte de las ligas profesionales dejan que las oficinas de administración central hagan la programación. Hay algunas características importantes de una programación. 
+La más importante es la estructura. Actualmente la mayoría de las ligas usan un formato de programación de \emph{torneos round robin}, lo cual significa que cada equipo jugará un número 
+definido de veces en un período de tiempo denominado ronda. La programación de \emph{torneos round robin} puede ser dividido en dos tipos, \emph{programación con tiempo restringido} y
+\emph{programación con tiempo relajado}. En las primeras, el número de rondas disponibles es igual al número de rondas necesarias. Éste tipo de programación es usado en muchas ligas,
+en la mayoría de los torneos universitarios de balóncesto, en ligas profesionales de fútbol en Europa y Sudamérica. En las segundas, el número de rondas disponibles es mayor que el número de rondas
+necesarias. Éste último tipo de programación es usado en algunas ligas, en la asociación nacional de baloncesto (NBA) y en la liga nacional de hockey (NHL) en Estados Unidos. \\
+
+El Traveling Tournament Problem (TTP) fue propuesto por \cite{RSGD:1} es un problema típico de calendarización de ligas deportivas 
+que se resume en las características más destacadas de la Major League Baseball (MLB) en los Estados Unidos y se creó para estimular la 
+investigación en la calendarización de las ligas deportivas. El problema consiste en minimizar la distancia total recorrida por todos los equipos. \\
+
+Como se vió anteriormente, existen torneos en los que el número de rondas disponibles es mayor que el número de rondas necesarios. Es por ésta razón que \cite{RSGD:3} proponen
+una nueva versión del TTP llamada Time Relaxed Tournament Problem, en ésta versión los equipos tienen rondas libres entre los juegos, éste número de rondas libres es controlado por un parámetro $K$, para el 
+caso particular $K = 0$ corresponde al problema TTP. \\
+
+En el presente trabajo, definiré lo que es TTP, para luego introducir la variante RTTP que es la que me centraré en resolver. Definiré de maneras mas detallada el RTTP, además
+se verán los mejores resultados conocidos a la fecha en la literatura. \\
+
+Finalmente desarrollaré un algoritmo llamado \emph{Hill Climbing alguna mejora} con el fin de resolver el RTTP, para luego comparar mis resultados con los de la literatura.
+
+
+\section{Definición del Problema}
+%Explicación del problema que se va a estudiar, en que consiste, cuales son sus variables, restricciones y objetivos de manera general. Variantes más conocidas que existen.
+\subsection{Traveling Tournament Problem (TTP)}
+Dado $n$ equipos, un \emph{torneo doble round robin} es un conjunto de juegos en el cuál cada equipo debe jugar con los $n-1$ equipos restantes sólo una vez como local y una como visita. \\
+
+Un juego es especificado por un par ordenado de los oponentes. Exactamente $2(n-1)$ rondas son requeridas para jugar un \emph{torneo doble round robin}, ya que deben jugar 
+como visita y como local contra los $n-1$ equipos restantes ($2(n-1)$). Las distancias entre los lugares de los equipos viene dada por una matriz de distancia $D$ de orden $nxn$. El costo de una 
+programación para un equipo es la distancia total que éste debe viajar para jugar con los $n-1$ oponentes como visita y como local, para finalmente volver a su lugar inicial (casa).  \\
+
+Juegos consecutivos como visita para un equipo constituyen un \emph{road trip}, juegos consecutivos constituyen un \emph{home stand}. La longitud de un \emph{road trip} o de un \emph{home stand} 
+es el número de oponentes jugados (no la distancia viajada). \\
+
+El problema consiste en minimizar la distancia total recorrida por todos los equipos, sujeto a algunas restricciones.
+
+\subsubsection{Definición}
+
+El \emph{TTP} se define de la siguiente forma: \\
+
+\textbf{Input:} 
+\begin{itemize}
+ \item 	$n$ : número de equipos.
+  \item $D$ : matriz simétrica de orden $nxn$ que contiene las distancias.
+  \item $L$, $U$ : parámetros enteros.
+\end{itemize}
+
+\textbf{Output:}\\
+Un \emph{torneo doble round robin} con $n$ equipos en donde:
+\begin{itemize}
+ \item La longitud de cada \emph{home stand} y \emph{road trip} están en el rango $[L,U]$.
+ \item La distancia total viajada por cada equipo es minimizada.   
+\end{itemize}
+
+  Los parámetros $L$ y $U$ definen el equilibrio entre las consideraciones de distancia y de patrón. Para $L = 1$
+ y $U = n-1$, un equipo puede tener un viaje equivalente a una gira (muchos viajes). Para pequeños $U$, los equipos 
+deben volver a casa seguido, por lo que la distancia recorrida se incrementará. \\
+
+Además de las restricciones principales (duras), el programa debe tener dos restricciones adicionales:
+\begin{enumerate}
+ \item \emph{Mirrored:} a programación del \emph{torneo doble round robin} debe tener los primeros $n - 1$ juegos 
+en el mismo orden con los $n - 1$ juegos restantes, pero invirtiendo los roles de local y visitante.
+ \item \emph{No Repeaters:} Una programación no pude tener dos juegos consecutivos entre los mismos equipos.
+\end{enumerate}
+
+Con éstas últimas dos restricciones me refiero a dos variantes del TTP, con la primera a \emph{TTP / Mirrored} y con la 
+segunda al \emph{TTP / No repeat}. \\
+
+\subsection{Time Relaxed Traveling Tournament Problem (RTTP)}
+
+Time Relaxed Traveling Tournament Problem es una variante del ya explicado TTP y es propuesto por \cite{RSGD:2}. \\
+
+Las distancias viajadas son una preocupación importante en los problemas de programación de torneos. Cada equipo quiere
+minimizar lo mas que se pueda las distancias que éstos recorren. Viajes de grandes distancias tienen resultados no deseados,
+tales como fatiga en los jugadores, costos altos de transporte, etc. \\
+
+El organismo administrativo del torneo debe asegurarse que la distancia de viaje sea justa para todos los equipos, ademas de minimizarlas.\\
+
+\subsubsection{Definición}
+
+El \emph{RTTP} se define de la siguiente forma: \\
+
+\textbf{Input:}
+\begin{itemize} 
+    \item $n$ : número de equipos. 
+  \item $D$ : matriz simétrica de orden $nxn$ que contiene las distancias.
+  \item$L$, $U$, $B$, $O$ : parámetros enteros.
+\end{itemize}
+
+
+\textbf{Output:} \\
+Un \emph{torneo doble round robin} con $n$ equipos en donde:
+\begin{itemize}
+ \item La longitud de cada \emph{home stand} y \emph{road trip} están en el rango $[L,U]$.
+ \item El número de juegos consecutivos sin días libres es menor que $B$. 
+ \item El número de días libres consecutivos son menores que $O$
+ \item El número total de rondas es $4(n-1)$
+\item La distancia total viajada por cada equipo es minimizada.   
+\end{itemize}
+
+Cabe destacar que en esta variante se agregan tres nuevas restricciones. Si un equipo juega en dos días consecutivos, tiene 
+desventaja en el segundo juego. Normalmente los equipos quieren evitar tal situación, es por esto que es introducido el nuevo parámetro $B$ 
+descrito anteriorente. Análogamente, se ha restringido el número de días libres consecutivos. La tercera nueva restricción
+es el número total de rondas. Se define el total de rondas al doble de el número de juegos que debe realizar cada equipo, porque cada equipo debe 
+jugar $2(n - 1)$ juegos en un \emph{torneo doble round robin}, por lo tanto el total de rondas disponibles asciende a $4(n-1)$.
+
+\section{Estado del Arte}
+%Lo más importante que se ha hecho hasta ahora con relación al problema. Debería responder preguntas como las siguientes ¿Cuando surge?, ¿qué métodos se han usado para resolverlo?, ¿cuáles son los mejores algoritmos que se han creado hasta la fecha?, ¿qué representaciones han tenido los mejores resultados?, tipos de movimientos, heurísticas, métodos completos, tendencias, etc... Puede incluir gráficos comparativos, o explicativos.
+Exiten dos clases de problemas de programación deportiva en la literatura. La primera clase minimiza el número de días libres y es aplicado 
+a las ligas Europeas, porque cada equipo vuelve a su casa después de cada partido como visita. \cite{RSGD:4} y \cite{RSGD:5} \cite{RSGD:6} discuten
+las aplicaciones de la teoría de grafos y sus métodos para resolverlo. \\
+
+La segunda clase, minimiza la distancia viajada por los equipos y es aplicado a las ligas Americanas. \cite{RSGD:7} consideran
+el problema como una programación de una liga de basketball. Para resolver el problema ellos usaron un enfoce de dos fases. \cite{RSGD:8} consideran
+un problema similiar para programar la liga NBA. Ellos construyen un modelo de programación entera que fue muy largo para resolver por algoritmos 
+exactos. En su lugar, se aplicó una versión revisada del método de dos fases de \cite{RSGD:7}. \cite{RSGD:9} estudiaron
+el problema de programación para la liga de hokey (NHL) que fue dividido en dos conferencias. \\
+
+\cite{RSGD:10} fue el primer investigador quien aplicó una solución por métodos metaheurísticos para resolver problemas de programacion de ligas
+deportivas el cual pretendía minimizar la distancia recorrida por los equipos. El programó el NHL con una combinación de \emph{Tabú Search} \cite{RSGD:11} y 
+\emph{Algoritmos Genéticos}. Además, \cite{RSGD:13} presenta Simulated Annealing \cite{RSGD:12} para resolver la programación de la liga nacional de basketball de Nueva Zelanda. \\
+
+\cite{RSGD:1} introducen el problema Traveling Tournament Problem (TTP) motivados por la liga major de baseball (MLB). La 
+solución del problema debe satisfacer restricciones de difícil viabilidad, como además minimizar la distancia recorrida por los equipos. \\
+
+Algunos métodos han sido ofrecidos para resolver el TTP. \cite{RSGD:1} introdujo un algoritmo basado en un límite inferior \emph{(lower bound)}, la cuál
+es la suma de la distancia mínima viajada por cada equipo. \cite{RSGD:15} usa una combinación entre la Relajación de Lagrange y Programación con Restricciones.
+Luego \cite{RSGD:14} presenta un algoritmo híbrido IP/CP (Programación entera/Programación con restricciones). Además, \cite{RSGD:16}, desarrollaron
+un algoritmo \emph{Simulated Annealing}, ellos separaron las restricciones en restricciones duras y restricciones blandas. \\
+\cite{RSGD:17} para complementar el modelo de programación entera para el TTP con restricciones de \emph{no-repeater}, introduce un algoritmo \emph{Tabu Search} para resolver
+ese problema. \cite{RSGD:18} propone la hibridación de búsqueda por vecindarios largos y programación con restricciones. \cite{RSGD:19} consideran una
+clase específia del TTP y demuestran que este caso corresponde a maximizar el número de días libres. \cite{RSGD:20} propone un híbrido \emph{SA-Hill} que combina
+los métodos \emph{Simulated Annealing} y \emph{Hill Climbing}. \\
+
+Para instancias más grandes, los métodos con mejores resultados son los basados en metaheurísticas con post-procesamiento de búsqueda local \cite{RSGD:16}, \cite{RSGD:21}, \cite{RSGD:22}, \cite{RSGD:23}.
+
+\subsection{Mejores resultados en la literatura}
+
+Luego de hacer una revisión de lo que se ha investigado hasta ahora, haré una tabla comparativa con los mejores resultados conocidos hasta ahora con algunas instancias \cite{RSGD:3} \cite{RSGD:1} de los algoritmos para cada uno de los 
+problemas (TTP y RTTP).
+
+\subsubsection{TTP}
+\begin{tabular}{ | l | l | l | l | l | l |}
+\hline
+\textbf{Paper}  & \textbf{NL8} &  \textbf{NL10} & \textbf{NL12} & \textbf{NL14} & \textbf{NL16}\\ \hline
+\cite{RSGD:22} 	&	 - 	&	-	& 110729	& 188728	 &	261687	 \\ \hline
+\cite{RSGD:16}	& 39721		& 59583		& 111248	& 188728	& 	263772 	\\ \hline
+\cite{RSGD:21}	& 	-	& 59583		& 111483	& 190174	& 	270063 	\\ \hline
+\cite{RSGD:20}	& 39721		& 59821		& 115089	& 196363	& 	274673 	\\ \hline
+\textbf{Mejor conocido}	& \textbf{39721}	& \textbf{59436} & \textbf{110729} & \textbf{188728} & 	\textbf{261687} \\ \hline
+\end{tabular}
+
+\subsubsection{RTTP}
+\begin{tabular}{ | l | l | l |}
+\hline
+Bao and Trick, August, 2010	& \textbf{NL4}  \\ \hline
+$ K = 1$			& 8160 		\\ \hline
+$ K = 2$			& 8160 		\\ \hline
+$ K = 3$			& 8044 		\\ \hline
+\end{tabular}
+\begin{tabular}{ | l | l | l | l |}
+\hline
+Brandão, October, 2010	& \textbf{NL6}	& \textbf{NL8}  \\ \hline
+$K = 1$			& 23791 	& 39128		\\ \hline
+$K = 2$			& 	-	& 38761		\\ \hline
+$K \geq 2$		& 22557 	&	-	\\ \hline
+$K \geq 3$		& 	-	& 38670		\\ \hline
+\end{tabular}
+
+\section{Modelo Matemático}
+%Uno o más modelos matemáticos para el problema, idealmente indicando el espacio de búsqueda para cada uno.
+\subsection{Representación}
+El siguiente modelo fue inspirado en el desarrollado por \cite{RSGD:16} para resolver el TTP. \\
+
+Dado un conjunto $T = \{T_1, T_2, \dots, T_n\}$ de $n$ equipos, un conjunto $R = \{R_1, R_2, \dots, R_m\}$ de $m$ rondas y $k$ rondas libres. En una programación
+de un \emph{torneo round robin} definimos la representación de la matriz MT (Matriz de torneo) como $n\times(m + k)$, donde el valor de cada elemento $|a{ij}|$ indica 
+el oponente del equipo $T_i$ en una ronda $R_j$.
+\begin{itemize}
+ \item $|a_{ij}| \in \{0,\dots,N\}$ con $|a_{ij}| \neq i$
+ \item $a_{ij} > 0$, cuando el equipo $T_i$ juega de local.
+ \item $a_{ij} < 0$, cuando el equipo $T_i$ juega de visita.
+ \item $a_{ij} = 0$, cuando el equipo $T_i$ no juega.
+\end{itemize}
+
+En la siguiente tabla se muestra una instancia para NL6 con la representación descrita anteriormente. \\
+
+\includegraphics[scale=0.7]{tabla.png}
+%hacer tabla a mano
+
+La programación muestra que el equipo 1 ($T_1$) juega contra: $T_6$ como local, $T_2$ como visita, $T_4$ como local, $T_3$ como local, $T_5$ como visita, $T_4$ como visita, 
+$T_3$ como visita,$T_5$ como local, $T_2$ como local y $T_6$ como visita, por lo que la distancia total recorrida para el $T_1$ es: \\
+
+$\phi_1 = d_{12} +  d_{21} + d_{15} + d_{54} + d_{43} + d_{31} + d_{16} + d_{61}$
+
+\subsection{Restricciones}
+Para manejar las restricciones las he dividido en dos tipos: \emph{restricciones duras} y \emph{restricciones blandas}. Las restricciones duras se definen como las restricciones del TTP, luego las restricciones
+blandas se definen como las restricciones que se añaden al TTP en el RTTP.
+\subsubsection{Restricciones Duras}
+\begin{itemize}
+ \item La longitud de cada \emph{home stand} y \emph{road trip} están en el rango $[L,U]$.
+ \item Cada equipo debe jugar con los restantes equipos dos veces, una vez en calidad de local y la otra en calidad de visita.
+\end{itemize}
+\subsubsection{Restricciones Blandas}
+\begin{itemize}
+ \item El número de juegos consecutivos sin días libres es menor que $B$.
+ \item El número de días libres consecutivos son menores que $O$
+ \item El número total de rondas es $2(n - 1) + k$
+\end{itemize}
+
+Si bien, el modelo presentado por \cite{RSGD:2} utiliza como número total de rondas igual a $4(n - 1)$, en este trabajo se utilizará como $2(n - 1) + k$, ya que cada equipo debe jugar con los $n - 1$ equipos restantes dos veces,
+una como local y la otra como visita, además en el RTTP se agregan $k$ rondas libre, es por eso que se le suma $k$.
+
+
+\subsection{Función Objetivo y Fitness}
+\subsubsection{Función Objetivo \textbf{$F_o$}}
+El objetivo del problema es minimizar la distancia total recorrida por los $n$ equipos, respetando las restricciones duras mencionadas anteriormente. \\
+
+Sea $\phi_j$ la distancia recorrida por el equipo $j$.  
+
+\begin{equation}
+F_o = min{\sum_{j=1}^{n} {\phi_j}}
+\end{equation}
+
+\subsubsection{Funcion Fitness \textbf{$F_f$}}
+Con el fin de manejar las restricciones blandas, se introduce una función \emph{fitness}, para penalizar el incumplimiento de alguna restricción agregándole por cada vez que se viole un peso o costo $\delta_i$ asociado a la 
+restricción blanda $i$. Dichos pesos serán definidos por importancia de las restricciones, a mayor importancia, mayor peso. \\
+
+La \emph{Función Fitness} queda definida de la siguiente manera:\\
+
+Sea $n$ el número de equipos, $v_i$ el número de veces que la restricción $i$ es violada $\forall{i} \in [1,3]$ y $\phi_j$ la distancia total recorrida por el equipo $j$ $\forall{j} \in [1,n]$
+
+\begin{equation}
+F_f = min{(\sum_{i=1}^{3} {v_l \times \delta_i}}
+\end{equation}
+
+Un peso $\delta_1= 500$ es sumado por cada vez que la siguiente restriccón blanda es violada.
+\begin{itemize}
+ \item El número de juegos consecutivos sin días libres es menor que $B$.
+\end{itemize}
+
+Luego un peso $\delta_2 = 100$ es sumado por cada vez que la siguiente restricción blanda es violada.
+\begin{itemize}
+ \item El número de días libres consecutivos son menores que $O$
+\end{itemize}
+
+%El objetivo es minimizar la \emph{función fitness} $F_f$.
+
+\section{Descripción del algoritmo}
+\subsection{Componentes Hill Climbing propuesto}
+
+En el presente trabajo usaré \emph{Hill Climbing alguna mejora} para explorar el vecindario de una solución. \\
+
+\subsubsection{Vecindario}
+El algoritmo propuesto usa 6 movimientos para la creación del vecindario de una solución. Los siguientes 5 movimientos fueron propuestos por un algoritmo Simulated Annealing en \cite{RSGD:16}.
+\begin{itemize}
+ \item \textbf{SwapHomes($E_i$,$E_j$)}. Este movimiento intercambia los roles local/visita de los equipos $E_i$, $E_j$.
+ \item \textbf{SwapRounds($R_i$,$R_j$)}. Este movimiento intercambia la ronda $R_i$ con la ronda $R_j$.
+ \item \textbf{SwapTeams($E_i$,$E_j$)}. Este movimiento intercambia la programación de los equipos $E_i$ y $E_j$ (Excepto, cuando dichos equipos juegan entre sí).  
+ \item \textbf{PartialSwapRounds($E_i$, $R_k$, $R_l$)}. Este movimiento intercambia la ronda $R_k$ con la ronda $R_l$ en el equipo $E_i$.
+ \item \textbf{PartialSwapTeams($E_i$, $E_j$, $R_k$)}.  Este movimiento intercambia la ronda $R_k$ entre los equipos $E_i$ y $E_j$.
+\end{itemize}
+Con el objetivo de manejar las rondas libres, se introduce un nuevo movimiento el que llamaré \textbf{SwapByes($E_i$,$E_j$)}, este movimiento intercambia una ronda libre entre los equipos $E_i$ y $E_j$ si existe. En este movimiento
+se pueden crear dos posibles programaciones. \\
+%\newpage
+Ejemplo:
+
+\begin{tabular}{ | l | l | l | l | l | l | l |}
+\hline
+-2 & 3 & 4 & -4 & -3 & 2 & 0 \\ \hline
+1 & -4 & -3 & 3 & 4 & -1 & 0 \\ \hline
+-4 & -1 & 2 & -2 & 1 & 4 & 0 \\ \hline
+3 & 2 & -1 & 1 & -2 & -3 & 0 \\ \hline
+\end{tabular}
+
+\vspace{0.2cm}
+
+Al aplicar SwapByes($E_i = 2$, $E_j = 4$). Se pueden producir las siguientes dos programaciones:
+
+\vspace{0.2cm}
+
+\begin{tabular}{ | l | l | l | l | l | l | l |}
+\hline
+-2 & 3 & 4 & -4 & 0 & 2 & -3 \\ \hline
+1 & -4 & -3 & 3 & 4 & -1 & 0 \\ \hline
+-4 & -1 & 2 & -2 & 0 & 4 & 1 \\ \hline
+3 & 2 & -1 & 1 & -2 & -3 & 0 \\ \hline
+\end{tabular}
+
+\vspace{0.5cm}
+
+\begin{tabular}{ | l | l | l | l | l | l | l |}
+\hline
+-2 & 0 & 4 & -4 & -3 & 2 & 3 \\ \hline
+1 & -4 & -3 & 3 & 4 & -1 & 0 \\ \hline
+-4 & 0 & 2 & -2 & 1 & 4 & -1 \\ \hline
+3 & 2 & -1 & 1 & -2 & -3 & 0 \\ \hline
+\end{tabular}
+
+\vspace{0.2cm}
+
+El criterio de elección de dichas programaciones será un factor aleatorio $\in [0,1]$. Si dicho factor es mayor a $0.5$ la primera programación es elegida, de lo contrario se elige la segunda.
+
+\subsubsection{Solución Inicial}
+
+Hill Climbing requiere de una solución inicial. En el algoritmo aplicado la solución inicial implementada es la basada en el método del poligono usado por \cite{RSGD:24}, pero con algunas modificaciones. \\
+
+Sea $N$ el número de equipos. En \cite{RSGD:24} para construir el polígono ocupa los equipos $1\dots N-1$. En el presente algoritmo hago una modificación, elijo aleatoriamente un equipo $n \in [1,N]$. Luego en base a la elección
+de $n$ construyo el polígono, es decir, ingreso al polígono el conjunto $N - {n}$, al igual que \cite{RSGD:24}, pero con un $n$ aleatorio, con el fin de aleatorizar mas la solución inicial, ya que Hill Climbing depende mucho
+de ésta. 
+
+\subsection{Hill Climbing propuesto}
+
+Hill Climbing es un algoritmo iterativo de búsqueda local, es un algoritmo incompleto, es decir no busca por todo el espacio de búsqueda. Este algoritmo requiere de una solución inicial, a partir de ésta solución, en cada iteración 
+del algoritmo se aplica uno de los movimientos definidos para encontrar una mejor solución. Los movimientos usados en este trabajo quedaron definidos en la sección 5.1.1 \\
+
+Existen diversas variantes de Hill Climbing: 
+\begin{itemize}
+ \item \textbf{Hill Climbing alguna mejora:} Recorre vecindario hasta encontrar uno mejor.
+ \item \textbf{Hill Climbing mejor mejora:} Recorre el vecindario completo y elige el mejor de todos ellos.
+\end{itemize}
+
+Debido al problema de Hill Climbing de caer fácilmente en óptimos locales, es decir no pueda encontrar una mejor solución en el futuro. En el presente trabajo definiré un nuevo parámetro llamado \textbf{maxIters}, éste 
+parámetro controla el número de iteraciones en donde el algoritmo está estancado en un óptimo local, es decir, luego de \textbf{maxIters} iteraciones el algoritmo se reinicia. Con este nuevo parámetro agregaremos al algoritmo
+la capacidad de \emph{explorar}. 
+
+Usaré tres diferentes \emph{restarts}.
+\begin{itemize}
+ \item Elegir una solución dentro de las mejores soluciones comparadas a la solución inicial.
+ \item Elegir una solución dentro de las peores soluciones comparadas a la solución inicial.
+ \item Crear nueva solución inicial con el método del polígono.
+\end{itemize}
+
+%Si bien el algoritmo \emph{Hill Climbing} busca mejorar las soluciones, permitiré al algoritmo al momento de reiniciarse partir de una solución peor que la actual, con el fin
+En el presente trabajo usaré \emph{Hill climbing alguna mejora con restarts}. El algoritmo usado es el siguiente:
+
+\begin{algorithm}
+  \begin{algorithmic}
+    \STATE Crear solución inicial.
+    \STATE Evaluar la \emph{distancia total} de la solución inicial.
+    \STATE Evaluar el \emph{fitness} de la solución inicial.
+    \STATE $iters = 0$.
+    \STATE $mejor\_solucion = solucion\_inicial.$
+    \STATE $maxIters = 10$.
+    \FOR{$t = 0$ \TO $numero\_iteraciones$}
+      \STATE $no\_mejore = true$.
+      \IF{($iters = maxIters$)}	
+	\STATE Elijo estado anterior aleatoreamente (mejor o peor) o creo nueva solucion inicial. 	
+      \ENDIF
+    \STATE Elijo un movimiento aleatoreamente.
+    \FOR{Cada elemento del vecindario}
+    \IF{(($Distancia\_nueva\_sol < Distancia\_sol\_actual$) \OR ($Distancia\_nueva\_sol = Distancia\_sol\_actual$ \AND $Fitness\_nueva\_sol < Fitness\_sol\_actual$))}
+      \STATE $sol\_actual = nueva\_sol$.
+      \STATE $no\_mejore = false$. 
+      \IF{(($Distancia\_nueva\_sol < Distancia\_mejor\_solucion$) \OR ($Distancia\_nueva\_sol = Distancia\_mejor\_solucion$ \AND $Fitness\_nueva\_sol < Fitness\_mejor\_solucion$))}
+      \STATE $mejor\_solucion = nueva\_sol$.
+      \ENDIF
+      \STATE \textbf{break.} \emph{//paro el for, ya que encontré una mejor solución.}
+    \ENDIF
+    \ENDFOR
+    \IF{($no\_mejore$)}
+      \STATE $iters = iters + 1$.
+    \ENDIF
+    \ENDFOR
+    \STATE Imprimir $mejor\_solucion$.
+  \end{algorithmic}
+  \caption{Hill Climbing alguna mejora con restarts para RTTP}\label{Algoritmof}
+\end{algorithm}
+
+\section{Experimentos}
+
+%Los experimientos se hicieron con las instancias propuestas en la presentación del problema. \\
+
+%En la siguiente tabla se muestran las instancias que se usaron, con cada uno de los parámetros.  \\
+ 
+%\begin{tabular}{| l | l | l | l | l | l | l | l | l |}
+%\hline
+%\textbf{Instancia} & \textbf{N} &\textbf{K} & \textbf{L} & \textbf{U} & \textbf{B} & \textbf{O} & Iteraciones & \textbf{maxIters} \\ \hline
+%data4.txt & 4 & 0 & 1 & 3 & 3 & 4 & 20\\ \hline
+%data4.txt & 4 & 1 & 1 & 3 & 3 & 4 & 20\\ \hline
+%data4.txt & 4 & 2 & 1 & 3 & 3 & 4 & 20\\ \hline
+%data6.txt & 6 & 0 & 1 & 3 & 3 & 4 & 20\\ \hline
+%data6.txt & 6 & 1 & 1 & 3 & 3 & 4 & 20\\ \hline
+%data6.txt & 6 & 2 & 1 & 3 & 3 & 4 & 20\\ \hline
+%data8.txt & 8 & 0 & 1 & 3 & 3 & 4 & 20\\ \hline
+%data8.txt & 8 & 1 & 1 & 3 & 3 & 4 & 20\\ \hline
+%data8.txt & 8 & 2 & 1 & 3 & 3 & 4 & 20\\ \hline
+%data10.txt & 10 & 0 & 1 & 3 & 3 & 4 & 20 \\ \hline
+%data10.txt & 10 & 1 & 1 & 3 & 3 & 4 & 20\\ \hline
+%data10.txt & 10 & 2 & 1 & 3 & 3 & 4 & 20\\ \hline
+%\end{tabular}
+%\\
+
+%Si bien el algoritmo no posee parámetros que regulen la capacidad del algoritmo de explotar o explorar, es por eso que se definió el parámetro \textbf{maxIters}, dicho parámetro le da la capacidad al algoritmo de explorar, ya que 
+%luego de \textbf{maxIters} iteraciones en el que el algoritmo está estancado en un óptimo local, el algoritmo se reinicia, es decir comienza desde una nueva solución inicial. \\
+
+%Como se dijo anteriormente, usaré tres diferentes restarts. Si bien \emph{Hill Climbing} va buscando una mejor solución cada vez que itera, permitiré al algoritmo reiniciarse sobre un estado anterior que haya sido peor que alguna solución inicial, 
+%con el fin de que el algoritmo pueda explorar más, ya que por ejemplo, puede que al lado de una solución muy mala dentro de el espacio de búsqueda esté una muy buena y si parto desde ahí Hill Climbing encontrará dicha buena solución. 
+                                                                                                                                                            
+\section{Resultados}
+
+Las pruebas se hicieron en un computador con las siguientes características.
+\begin{itemize}
+ \item CPU: Intel i5 ...
+ \item RAM: 4 GB
+ \item Sistema Operativo: Ubuntu 11.04 kernel 2.6.38-9-generic
+ \item gcc 4.5.2
+\end{itemize}
+
+\section{Conclusiones}%REFERENCIAS
+%Indicando toda la información necesaria como para poder conseguir las referencias.
+\bibliographystyle{apalike}
+
+\bibliography{bibliografia}
+
+\end{document} 
