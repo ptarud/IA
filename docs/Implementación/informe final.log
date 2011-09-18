@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.4)  25 JUL 2011 19:08
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.9.16)  18 SEP 2011 15:29
 entering extended mode
  %&-line parsing enabled.
 **"informe final.tex"
@@ -393,107 +393,143 @@ Overfull \hbox (8.73622pt too wide) in paragraph at lines 179--180
 al [[]],
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 179--180
+
+ []
+
 [4]
-Overfull \hbox (4.23618pt too wide) in paragraph at lines 183--185
+Underfull \hbox (badness 10000) in paragraph at lines 181--182
+
+ []
+
+
+LaTeX Warning: Citation `RSGD:26' on page 5 undefined on input line 183.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 183--187
+
+ []
+
+
+LaTeX Warning: Citation `RSGD:25' on page 5 undefined on input line 188.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 188--190
+
+ []
+
+
+Overfull \hbox (4.23618pt too wide) in paragraph at lines 195--197
 \OT1/cmr/m/n/10 ti-va con los me-jo-res re-sul-ta-dos co-no-ci-dos has-ta aho-r
 a con al-gu-nas ins-tan-cias [[]]
  []
 
 
-Overfull \hbox (15.01282pt too wide) in paragraph at lines 187--196
+Overfull \hbox (15.01282pt too wide) in paragraph at lines 199--208
 [][] 
  []
 
 
-Overfull \hbox (19.09734pt too wide) in paragraph at lines 217--218
+LaTeX Warning: Citation `RSGD:26' on page 5 undefined on input line 212.
+
+
+LaTeX Warning: Citation `RSGD:25' on page 5 undefined on input line 219.
+
+
+Overfull \hbox (19.09734pt too wide) in paragraph at lines 230--231
 []\OT1/cmr/m/n/10 El si-guien-te mo-de-lo fue ins-pi-ra-do en el desa-rro-lla-d
 o por [[]]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 217--218
+Underfull \hbox (badness 10000) in paragraph at lines 230--231
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 229--230
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 242--243
 
  []
 
-<tabla.png, id=24, 435.12563pt x 151.3153pt>
+<tabla.png, id=29, 435.12563pt x 151.3153pt>
 File: tabla.png Graphic file (type png)
- <use tabla.png> [5]
-Underfull \hbox (badness 10000) in paragraph at lines 234--236
+ <use tabla.png>
+Underfull \hbox (badness 10000) in paragraph at lines 247--249
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--261
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 269--271
+Underfull \hbox (badness 10000) in paragraph at lines 273--274
 
  []
 
 [6 <./tabla.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 272--273
+Underfull \hbox (badness 10000) in paragraph at lines 282--284
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 295--296
+Underfull \hbox (badness 10000) in paragraph at lines 285--286
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 308--309
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 349--350
+Underfull \hbox (badness 10000) in paragraph at lines 362--363
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 357--359
+Underfull \hbox (badness 10000) in paragraph at lines 370--372
 
  []
 
 [8]
-Underfull \hbox (badness 3240) in paragraph at lines 395--395
+Underfull \hbox (badness 3240) in paragraph at lines 407--407
 [] []\OT1/cmr/bx/n/10 if \OT1/cmr/m/n/10 (($\OML/cmm/m/it/10 Distancia[]nueva[]
 sol < Distancia[]sol[]actual$\OT1/cmr/m/n/10 ) \OT1/cmr/bx/n/10 or \OT1/cmr/m/n
 /10 ($\OML/cmm/m/it/10 Distancia[]nueva[]sol \OT1/cmr/m/n/10 =
  []
 
 
-Underfull \hbox (badness 1881) in paragraph at lines 398--398
+Underfull \hbox (badness 1881) in paragraph at lines 410--410
 \OML/cmm/m/it/10 Distancia[]mejor[]solucion$ \OT1/cmr/bx/n/10 and $\OML/cmm/m/i
 t/10 Fitness[]nueva[]sol < Fitness[]mejor[]solucion$\OT1/cmr/m/n/10 ))
  []
 
-(./informe final.bbl [9] [10]) [11] (./informe final.aux) ) 
+[9] [10] (./informe final.bbl [11] [12]) [13] (./informe final.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3046 strings out of 493848
- 38006 string characters out of 1152824
- 109786 words of memory out of 3000000
- 6280 multiletter control sequences out of 15000+50000
+ 3047 strings out of 493848
+ 38016 string characters out of 1152823
+ 111786 words of memory out of 3000000
+ 6281 multiletter control sequences out of 15000+50000
  12456 words of font info for 48 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  27i,9n,27p,456b,637s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts
-/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/publ
-ic/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
-cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.p
-fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-tex
-live/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/t
-ype1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/
-amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
-mr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
-sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on "informe final.pdf" (11 pages, 232915 bytes).
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/publi
+c/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb
+></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
+/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texli
+ve/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type
+1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
+onts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmt
+i10.pfb>
+Output written on "informe final.pdf" (13 pages, 239285 bytes).
 PDF statistics:
- 91 PDF objects out of 1000 (max. 8388607)
+ 98 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

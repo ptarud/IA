@@ -26,6 +26,9 @@ Name 1 in "A. Anagnostopoulos, L. Michel, P. Van Hentenryck, and Y. Vergados" ha
 while executing---line 1095 of file apalike.bst
 Name 1 in "A. Lim, B. Rodrigues, and X. Zhang" has a comma at the end for entry RSGD:20
 while executing---line 1095 of file apalike.bst
+Warning--empty title in RSGD:26
+Warning--empty journal in RSGD:26
+Warning--empty journal in RSGD:25
 Name 1 in "J.H. Lee, Y.H. Lee, and Y.H. Lee" has a comma at the end for entry RSGD:17
 while executing---line 1095 of file apalike.bst
 Warning--empty year in RSGD:24
@@ -33,45 +36,45 @@ Warning--empty journal in RSGD:24
 Name 1 in "T. Benoist, F. Laburthe, and B. Rottembourg" has a comma at the end for entry RSGD:15
 while executing---line 1095 of file apalike.bst
 Warning--empty journal in RSGD:3
-You've used 24 entries,
+You've used 26 entries,
             1935 wiz_defined-function locations,
-            618 strings with 7316 characters,
-and the built_in function-call counts, 10323 in all, are:
-= -- 1065
-> -- 246
-< -- 44
-+ -- 89
-- -- 74
-* -- 677
-:= -- 1613
-add.period$ -- 70
-call.type$ -- 24
-change.case$ -- 157
-chr.to.int$ -- 23
-cite$ -- 27
-duplicate$ -- 500
-empty$ -- 766
-format.name$ -- 124
-if$ -- 2251
+            627 strings with 7453 characters,
+and the built_in function-call counts, 10891 in all, are:
+= -- 1115
+> -- 266
+< -- 46
++ -- 97
+- -- 80
+* -- 722
+:= -- 1717
+add.period$ -- 73
+call.type$ -- 26
+change.case$ -- 169
+chr.to.int$ -- 25
+cite$ -- 32
+duplicate$ -- 526
+empty$ -- 806
+format.name$ -- 134
+if$ -- 2355
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 24
-newline$ -- 121
-num.names$ -- 72
-pop$ -- 139
+missing$ -- 26
+newline$ -- 128
+num.names$ -- 78
+pop$ -- 157
 preamble$ -- 1
-purify$ -- 157
+purify$ -- 170
 quote$ -- 0
-skip$ -- 484
+skip$ -- 504
 stack$ -- 0
-substring$ -- 823
+substring$ -- 849
 swap$ -- 190
 text.length$ -- 20
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 144
-warning$ -- 3
-while$ -- 88
+type$ -- 156
+warning$ -- 6
+while$ -- 92
 width$ -- 0
-write$ -- 305
+write$ -- 323
 (There were 13 error messages)

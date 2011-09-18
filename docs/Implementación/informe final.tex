@@ -176,7 +176,19 @@ ese problema. \cite{RSGD:18} propone la hibridación de búsqueda por vecindarios 
 clase específia del TTP y demuestran que este caso corresponde a maximizar el número de días libres. \cite{RSGD:20} propone un híbrido \emph{SA-Hill} que combina
 los métodos \emph{Simulated Annealing} y \emph{Hill Climbing}. \\
 
-Para instancias más grandes, los métodos con mejores resultados son los basados en metaheurísticas con post-procesamiento de búsqueda local \cite{RSGD:16}, \cite{RSGD:21}, \cite{RSGD:22}, \cite{RSGD:23}.
+Para instancias más grandes, los métodos con mejores resultados son los basados en metaheurísticas con post-procesamiento de búsqueda local \cite{RSGD:16}, \cite{RSGD:21}, \cite{RSGD:22}, \cite{RSGD:23}. \\
+
+Hasta ahora hemos visto los métodos para resolver el TTP que se han usado hasta la fecha. Ahora veré los métodos que se han usado para resolver el RTTP. \\
+
+En \cite{RSGD:26} hacen un desarrollo basado en programación entera y programación con restricciones. El problema fue realizado por 3 modelos independientes, el primero es la modelación
+po programación con restricciones para obtener los equipos en días de descanzo cuando juegan de visita en forma consecutiva. El segundo, es la modelación por programación
+con restricciones, pero ahora para equipos que permanecen fuera del lugar de origen en días de descanzo cuando juegan de visita en forma consecutiva. El tercero,
+es un método de descomposición basado en el concepto de viaje óptimo. \\
+
+En \cite{RSGD:25}b, presenta un método de búsqueda completo para resolver el problema, usando
+Branch and Bound, metaheurísticas y programación dinámica. \\
+
+Ahora la siguiente seccin se listan los mejores resultados de la literatura para los vistos anteriormente.
 
 \subsection{Mejores resultados en la literatura}
 
@@ -197,19 +209,20 @@ problemas (TTP y RTTP).
 \subsubsection{RTTP}
 \begin{tabular}{ | l | l | l |}
 \hline
-Bao and Trick, August, 2010	& \textbf{NL4}  \\ \hline
+\cite{RSGD:26}	& \textbf{NL4}  \\ \hline
 $ K = 1$			& 8160 		\\ \hline
 $ K = 2$			& 8160 		\\ \hline
 $ K = 3$			& 8044 		\\ \hline
 \end{tabular}
 \begin{tabular}{ | l | l | l | l |}
 \hline
-Brandão, October, 2010	& \textbf{NL6}	& \textbf{NL8}  \\ \hline
+\cite{RSGD:25}		& \textbf{NL6}	& \textbf{NL8}  \\ \hline
 $K = 1$			& 23791 	& 39128		\\ \hline
 $K = 2$			& 	-	& 38761		\\ \hline
 $K \geq 2$		& 22557 	&	-	\\ \hline
 $K \geq 3$		& 	-	& 38670		\\ \hline
 \end{tabular}
+
 
 \section{Modelo Matemático}
 %Uno o más modelos matemáticos para el problema, idealmente indicando el espacio de búsqueda para cada uno.
@@ -374,7 +387,6 @@ Usaré tres diferentes \emph{restarts}.
  \item Crear nueva solución inicial con el método del polígono.
 \end{itemize}
 
-%Si bien el algoritmo \emph{Hill Climbing} busca mejorar las soluciones, permitiré al algoritmo al momento de reiniciarse partir de una solución peor que la actual, con el fin
 En el presente trabajo usaré \emph{Hill climbing alguna mejora con restarts}. El algoritmo usado es el siguiente:
 
 \begin{algorithm}
@@ -384,7 +396,7 @@ En el presente trabajo usaré \emph{Hill climbing alguna mejora con restarts}. El
     \STATE Evaluar el \emph{fitness} de la solución inicial.
     \STATE $iters = 0$.
     \STATE $mejor\_solucion = solucion\_inicial.$
-    \STATE $maxIters = 10$.
+    %\STATE $maxIters = 10$.
     \FOR{$t = 0$ \TO $numero\_iteraciones$}
       \STATE $no\_mejore = true$.
       \IF{($iters = maxIters$)}	
@@ -412,46 +424,124 @@ En el presente trabajo usaré \emph{Hill climbing alguna mejora con restarts}. El
 
 \section{Experimentos}
 
-%Los experimientos se hicieron con las instancias propuestas en la presentación del problema. \\
+\subsection{Experimiento 1}
+\subsubsection{Objetivo}
+El objetivo de este experimento es conocer la cantidad de iteraciones en el que el algoritmo obtiene buenos resultados sin que demore tanto.
+\subsubsection{Experimento}
+Inicialmente setié la cantidad de iteraciones del algoritmo a 5000 y luego fui aumentando en 5000 iteraciones en cada experimento. Manteniendo fijo
+el otro páramatro (maxIters = 5). Se hizo el experimento con las distintas instancias y varias veces, pero partiendo de una cantidad mayor de iteraciones
+para instancias mas grandes, se corrió varias veces con la misma cantidad de iteraciones, ya que el algoritmo depende mucho de la solución inicial. Me quedé 
+la mejor solución encontrada.
+Utilicé los parámetros estándar del problema, K = 1, L = 1, U = 3, B = 3, O = 4., ya que cambiando esos parámetros se resuelve un problema distinto.
 
-%En la siguiente tabla se muestran las instancias que se usaron, con cada uno de los parámetros.  \\
- 
-%\begin{tabular}{| l | l | l | l | l | l | l | l | l |}
-%\hline
-%\textbf{Instancia} & \textbf{N} &\textbf{K} & \textbf{L} & \textbf{U} & \textbf{B} & \textbf{O} & Iteraciones & \textbf{maxIters} \\ \hline
-%data4.txt & 4 & 0 & 1 & 3 & 3 & 4 & 20\\ \hline
-%data4.txt & 4 & 1 & 1 & 3 & 3 & 4 & 20\\ \hline
-%data4.txt & 4 & 2 & 1 & 3 & 3 & 4 & 20\\ \hline
-%data6.txt & 6 & 0 & 1 & 3 & 3 & 4 & 20\\ \hline
-%data6.txt & 6 & 1 & 1 & 3 & 3 & 4 & 20\\ \hline
-%data6.txt & 6 & 2 & 1 & 3 & 3 & 4 & 20\\ \hline
-%data8.txt & 8 & 0 & 1 & 3 & 3 & 4 & 20\\ \hline
-%data8.txt & 8 & 1 & 1 & 3 & 3 & 4 & 20\\ \hline
-%data8.txt & 8 & 2 & 1 & 3 & 3 & 4 & 20\\ \hline
-%data10.txt & 10 & 0 & 1 & 3 & 3 & 4 & 20 \\ \hline
-%data10.txt & 10 & 1 & 1 & 3 & 3 & 4 & 20\\ \hline
-%data10.txt & 10 & 2 & 1 & 3 & 3 & 4 & 20\\ \hline
-%\end{tabular}
-%\\
+\subsection{Experimento 2}
+\subsubsection{Objetivo}
+El objetivo de este experimento es conocer la cantidad de iteraciones en que hay que dejar al algoritmo buscar con otros movimientos cuando se queda en estancado en un óptimo
+local, ya que elijo los movimientos que se harán cuando se quede estancado aleatoreamente.
+\subsubsection{Experimento}
+Inicialmente setié la cantidad de maxIters en 5 y luego fui aumentando en 5 iteraciones en cada experimento. Manteniendo fijo
+el otro páramatro iteraciones en 70000. Se hizo el experimento con la instancia mas grande y varias veces, ya que el algoritmo 
+depende mucho de la solución inicial. Me quedé con la mejor solución encontrada.
+Utilicé los parámetros estándar del problema, K = 1, L = 1, U = 3, B = 3, O = 4., ya que cambiando esos parámetros se resuelve un problema distinto.
 
-%Si bien el algoritmo no posee parámetros que regulen la capacidad del algoritmo de explotar o explorar, es por eso que se definió el parámetro \textbf{maxIters}, dicho parámetro le da la capacidad al algoritmo de explorar, ya que 
-%luego de \textbf{maxIters} iteraciones en el que el algoritmo está estancado en un óptimo local, el algoritmo se reinicia, es decir comienza desde una nueva solución inicial. \\
+\subsection{Experimento 3}
+\subsection{Objectivo}
+El objetivo de este experimento es conocer el comportamiento del algoritmo luego de haber realizado los experimentos 1 y 2 para la sintonización de parámetros.
+\subsubsection{Experimento}
+Se correrá el algoritmo variando el parámetro K y dejando fijos los parámetros L, U, B, O del problema. Los parámetros iteraciones y maxIters se setearán en 
+70000 y 30 respectivamente. Se hará el experimiento para todas las instancias. 
 
-%Como se dijo anteriormente, usaré tres diferentes restarts. Si bien \emph{Hill Climbing} va buscando una mejor solución cada vez que itera, permitiré al algoritmo reiniciarse sobre un estado anterior que haya sido peor que alguna solución inicial, 
-%con el fin de que el algoritmo pueda explorar más, ya que por ejemplo, puede que al lado de una solución muy mala dentro de el espacio de búsqueda esté una muy buena y si parto desde ahí Hill Climbing encontrará dicha buena solución. 
-                                                                                                                                                            
+                                                                                                                             
 \section{Resultados}
-
+El código fue desarrollado en C++. \\
 Las pruebas se hicieron en un computador con las siguientes características.
 \begin{itemize}
  \item CPU: Intel i5 ...
  \item RAM: 4 GB
- \item Sistema Operativo: Ubuntu 11.04 kernel 2.6.38-9-generic
- \item gcc 4.5.2
+  \item Sistema Operativo: Ubuntu 11.04 kernel 2.6.38-9-generic
+  \item gcc 4.5.2
 \end{itemize}
+
+\subsection{Experimento 1}
+\begin{tabular}[h]{ | l | l | l | l | }
+\hline
+\textbf{Iteraciones} & \textbf{Instancia} & \textbf{maxIters} & \textbf{Resultado} \\ \hline
+5000 & data4.txt & 5 & 8276 \\ \hline
+10000 & data4.txt & 5 & 8197 \\ \hline
+15000 & data4.txt & 5 & 8160 \\ \hline
+20000 & data4.txt & 5 & 8160 \\ \hline
+\end{tabular}
+
+\begin{tabular}[h]{ | l | l | l | l | }
+\hline
+\textbf{Iteraciones} & \textbf{Instancia} & \textbf{maxIters} & \textbf{Resultado} \\ \hline
+20000 & data6.txt & 5 & 23487 \\ \hline
+25000 & data6.txt & 5 & 23487 \\ \hline
+30000 & data6.txt & 5 & 23301 \\ \hline
+35000 & data6.txt & 5 & 23292  \\ \hline
+40000 & data6.txt & 5 & 23292  \\ \hline
+45000 & data6.txt & 5 & 23292  \\ \hline
+\end{tabular}
+
+\begin{tabular}[h]{ | l | l | l | l | }
+\hline
+\textbf{Iteraciones} & \textbf{Instancia} & \textbf{maxIters} & \textbf{Resultado} \\ \hline
+35000 & data8.txt & 5 & 42014  \\ \hline
+40000 & data8.txt & 5 & 41694  \\ \hline
+45000 & data8.txt & 5 & 41694  \\ \hline
+50000 & data8.txt & 5 & 41694  \\ \hline
+\end{tabular}
+
+\begin{tabular}[h]{ | l | l | l | l | }
+\hline
+\textbf{Iteraciones} & \textbf{Instancia} & \textbf{maxIters} & \textbf{Resultado} \\ \hline
+40000 & data10.txt & 5 & 70456 \\ \hline
+45000 & data10.txt & 5 & 69196 \\ \hline
+50000 & data10.txt & 5 & 69196 \\ \hline
+55000 & data10.txt & 5 & 68252 \\ \hline	
+60000 & data10.txt & 5 & 67084 \\ \hline
+65000 & data10.txt & 5 & 67837 \\ \hline
+70000 & data10.txt & 5 & 66673 \\ \hline
+75000 & data10.txt & 5 & 69837 \\ \hline
+80000 & data10.txt & 5 & 68649 \\ \hline
+85000 & data10.txt & 5 & 67573 \\ \hline
+\end{tabular}
+
+\subsection{Experimento2}
+\begin{tabular}[h]{ | l | l | l | l | }
+\hline
+\textbf{Iteraciones} & \textbf{Instancia} & \textbf{maxIters} & \textbf{Resultado} \\ \hline
+70000 & data10.txt & 5  & 68419 \\ \hline
+70000 & data10.txt & 10 & 67519 \\ \hline
+70000 & data10.txt & 15 & 67630 \\ \hline
+70000 & data10.txt & 20 & 67130 \\ \hline	
+70000 & data10.txt & 25 & 67031 \\ \hline
+70000 & data10.txt & 30 & 65779 \\ \hline
+70000 & data10.txt & 35 & 66673 \\ \hline
+\end{tabular}
+
+\subsection{Experimento3}
+\begin{tabular}[h]{| l | l | l | l | l | }
+\hline
+\textbf{K} & \textbf{Iteraciones} & \textbf{Instancia} & \textbf{maxIters} & \textbf{Resultado} \\ \hline
+0 & 70000 & data4.txt & 30 & 8276 \\ \hline
+1 & 70000 & data4.txt & 30 & 8160 \\ \hline
+2 & 70000 & data4.txt & 30 & 8160 \\ \hline
+3 & 70000 & data4.txt & 30 & 8044 \\ \hline	
+\end{tabular}
+\begin{tabular}[h]{| l | l | l | l | l | }
+\hline
+\textbf{K} & \textbf{Iteraciones} & \textbf{Instancia} & \textbf{maxIters} & \textbf{Resultado} \\ \hline
+0 & 70000 & data6.txt & 30 & 23620 \\ \hline
+1 & 70000 & data6.txt & 30 & 23124 \\ \hline
+2 & 70000 & data6.txt & 30 & 22786 \\ \hline
+3 & 70000 & data6.txt & 30 &  \\ \hline	
+\end{tabular}
 
 \section{Conclusiones}%REFERENCIAS
 %Indicando toda la información necesaria como para poder conseguir las referencias.
+Sólo falta conclusiones. =)
+
 \bibliographystyle{apalike}
 
 \bibliography{bibliografia}

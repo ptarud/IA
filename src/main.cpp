@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
 
     srand(time(NULL));
     srand(rand());
-    if(argc == 9){
+    if(argc == 10){
         instance instancia;
         hc algoritmo;
         instancia.setN(atoi(argv[1]));
@@ -31,11 +31,11 @@ int main(int argc, char** argv) {
         solucion->init();
         printf("HILL CLIMBING Alguna Mejora con restarts\n");
         printf("\tParametros:\n");
-        printf("\t\tN = %d, K = %d, L = %d, U = %d, B = %d, O = %d, Instancia = %s, Iteraciones = %d\n\n",solucion->getN(),atoi(argv[2]),atoi(argv[3]),atoi(argv[4]),atoi(argv[5]),atoi(argv[6]),argv[8],atoi(argv[7]));
+        printf("\t\tN = %d, K = %d, L = %d, U = %d, B = %d, O = %d, Instancia = %s, Iteraciones = %d, MaxIters = %d\n\n",solucion->getN(),atoi(argv[2]),atoi(argv[3]),atoi(argv[4]),atoi(argv[5]),atoi(argv[6]),argv[8],atoi(argv[7]),atoi(argv[9]));
         
         algoritmo.setInitSol(solucion);
         algoritmo.setIterations(atoi(argv[7]));
-        algoritmo.run();
+        algoritmo.run(atoi(argv[9]));
         printf("MEJOR SOLUCION\n");
         solution *gbest = algoritmo.getGBest();
         gbest->printSolution();
@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
         return 1;
     }else{
         printf("Argumentos inválidos\n");
-        printf("./ia <num equipos> <K> <L> <U> <B> <O> <iteraciones> <archivo>\n");
+        printf("./ia <num equipos> <K> <L> <U> <B> <O> <iteraciones> <archivo> <maxIters>\n");
         return -1;
     }
 }

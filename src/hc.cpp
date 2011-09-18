@@ -26,8 +26,7 @@ void hc::setIterations(int iterations){
     this->iterations = iterations;
 }
 
-void hc::run(){
-    int maxIters = 10;
+void hc::run(int maxIters){
     g_best = new solution(*sol);
     vector<solution> mejores_soluciones;
     vector<solution> peores_soluciones;

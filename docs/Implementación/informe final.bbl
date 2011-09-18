@@ -12,6 +12,9 @@ A.~Lim, B.~R. and Zhang, X. (2006).
   tournament problem.
 \newblock {\em Electronic Notes in Discrete Mathematics}, pages 1459--1478.
 
+\bibitem[Bao and Trick, 2010]{RSGD:26}
+Bao and Trick (August, 2010).
+
 \bibitem[Bao, 2006]{RSGD:2}
 Bao, R. (2006).
 \newblock Time relaxed round robin tournament and the nba scheduling problem.
@@ -22,6 +25,10 @@ Bean, J. and Birge, J. (1980).
 \newblock Reducing travelling costs and player fatigue in the national
   basketball association.
 \newblock {\em Interfaces}, pages 98--102.
+
+\bibitem[Brandão, 2011]{RSGD:25}
+Brandão, F. (2011).
+\newblock A complete search method for relaxed traveling tournament problem.
 
 \bibitem[Campbell and Chen, 1976]{RSGD:7}
 Campbell, R. and Chen, D. (1976).
