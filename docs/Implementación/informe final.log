@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.9.16)  18 SEP 2011 15:29
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.9.16)  18 SEP 2011 16:24
 entering extended mode
  %&-line parsing enabled.
 **"informe final.tex"
@@ -404,15 +404,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 181--182
  []
 
 
-LaTeX Warning: Citation `RSGD:26' on page 5 undefined on input line 183.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 183--187
 
  []
-
-
-LaTeX Warning: Citation `RSGD:25' on page 5 undefined on input line 188.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 188--190
@@ -429,12 +423,6 @@ a con al-gu-nas ins-tan-cias [[]]
 Overfull \hbox (15.01282pt too wide) in paragraph at lines 199--208
 [][] 
  []
-
-
-LaTeX Warning: Citation `RSGD:26' on page 5 undefined on input line 212.
-
-
-LaTeX Warning: Citation `RSGD:25' on page 5 undefined on input line 219.
 
 
 Overfull \hbox (19.09734pt too wide) in paragraph at lines 230--231
@@ -502,34 +490,35 @@ Underfull \hbox (badness 1881) in paragraph at lines 410--410
 t/10 Fitness[]nueva[]sol < Fitness[]mejor[]solucion$\OT1/cmr/m/n/10 ))
  []
 
-[9] [10] (./informe final.bbl [11] [12]) [13] (./informe final.aux)
+[9] [10] [11]
+Underfull \hbox (badness 10000) in paragraph at lines 561--563
 
-LaTeX Warning: There were undefined references.
+ []
 
- ) 
+(./informe final.bbl [12] [13]) [14] (./informe final.aux) ) 
 Here is how much of TeX's memory you used:
  3047 strings out of 493848
  38016 string characters out of 1152823
- 111786 words of memory out of 3000000
+ 112824 words of memory out of 3000000
  6281 multiletter control sequences out of 15000+50000
  12456 words of font info for 48 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  27i,9n,27p,456b,637s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
-cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb
-></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
-/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texli
-ve/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type
-1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
-onts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmt
-i10.pfb>
-Output written on "informe final.pdf" (13 pages, 239285 bytes).
+</usr/share/texmf-t
+exlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/font
+s/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/pub
+lic/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
+/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.
+pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/sh
+are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public
+/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
+cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></
+usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on "informe final.pdf" (14 pages, 242066 bytes).
 PDF statistics:
- 98 PDF objects out of 1000 (max. 8388607)
+ 101 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

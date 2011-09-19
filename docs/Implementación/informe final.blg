@@ -38,7 +38,7 @@ while executing---line 1095 of file apalike.bst
 Warning--empty journal in RSGD:3
 You've used 26 entries,
             1935 wiz_defined-function locations,
-            627 strings with 7453 characters,
+            627 strings with 7452 characters,
 and the built_in function-call counts, 10891 in all, are:
 = -- 1115
 > -- 266

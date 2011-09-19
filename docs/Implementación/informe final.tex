@@ -185,10 +185,10 @@ po programación con restricciones para obtener los equipos en días de descanzo c
 con restricciones, pero ahora para equipos que permanecen fuera del lugar de origen en días de descanzo cuando juegan de visita en forma consecutiva. El tercero,
 es un método de descomposición basado en el concepto de viaje óptimo. \\
 
-En \cite{RSGD:25}b, presenta un método de búsqueda completo para resolver el problema, usando
+En \cite{RSGD:25}, presenta un método de búsqueda completo para resolver el problema, usando
 Branch and Bound, metaheurísticas y programación dinámica. \\
 
-Ahora la siguiente seccin se listan los mejores resultados de la literatura para los vistos anteriormente.
+Ahora la siguiente sección se listan los mejores resultados de la literatura para los vistos anteriormente.
 
 \subsection{Mejores resultados en la literatura}
 
@@ -449,7 +449,7 @@ Utilicé los parámetros estándar del problema, K = 1, L = 1, U = 3, B = 3, O = 4.
 El objetivo de este experimento es conocer el comportamiento del algoritmo luego de haber realizado los experimentos 1 y 2 para la sintonización de parámetros.
 \subsubsection{Experimento}
 Se correrá el algoritmo variando el parámetro K y dejando fijos los parámetros L, U, B, O del problema. Los parámetros iteraciones y maxIters se setearán en 
-70000 y 30 respectivamente. Se hará el experimiento para todas las instancias. 
+70000 y 30 respectivamente. Se hará el experimiento para todas las instancias y varias veces, ya que el algoritmo depende mucho de la solución inicial.
 
                                                                                                                              
 \section{Resultados}
@@ -518,6 +518,7 @@ Las pruebas se hicieron en un computador con las siguientes características.
 70000 & data10.txt & 25 & 67031 \\ \hline
 70000 & data10.txt & 30 & 65779 \\ \hline
 70000 & data10.txt & 35 & 66673 \\ \hline
+70000 & data10.txt & 40 & 66281 \\ \hline
 \end{tabular}
 
 \subsection{Experimento3}
@@ -529,18 +530,47 @@ Las pruebas se hicieron en un computador con las siguientes características.
 2 & 70000 & data4.txt & 30 & 8160 \\ \hline
 3 & 70000 & data4.txt & 30 & 8044 \\ \hline	
 \end{tabular}
+
 \begin{tabular}[h]{| l | l | l | l | l | }
 \hline
 \textbf{K} & \textbf{Iteraciones} & \textbf{Instancia} & \textbf{maxIters} & \textbf{Resultado} \\ \hline
 0 & 70000 & data6.txt & 30 & 23620 \\ \hline
 1 & 70000 & data6.txt & 30 & 23124 \\ \hline
 2 & 70000 & data6.txt & 30 & 22786 \\ \hline
-3 & 70000 & data6.txt & 30 &  \\ \hline	
+3 & 70000 & data6.txt & 30 & 22557 \\ \hline	
 \end{tabular}
 
+\begin{tabular}[h]{| l | l | l | l | l | }
+\hline
+\textbf{K} & \textbf{Iteraciones} & \textbf{Instancia} & \textbf{maxIters} & \textbf{Resultado} \\ \hline
+0 & 70000 & data8.txt & 30 &  41872 \\ \hline
+1 & 70000 & data8.txt & 30 & 40433 \\ \hline
+2 & 70000 & data8.txt & 30 &  \\ \hline
+3 & 70000 & data8.txt & 30 &  \\ \hline	
+\end{tabular}
+
+\begin{tabular}[h]{| l | l | l | l | l | }
+\hline
+\textbf{K} & \textbf{Iteraciones} & \textbf{Instancia} & \textbf{maxIters} & \textbf{Resultado} \\ \hline
+0 & 70000 & data10.txt & 30 & 65755 \\ \hline
+1 & 70000 & data10.txt & 30 & 65779 \\ \hline
+2 & 70000 & data10.txt & 30 &  \\ \hline
+3 & 70000 & data10.txt & 30 &  \\ \hline	
+\end{tabular}
 \section{Conclusiones}%REFERENCIAS
 %Indicando toda la información necesaria como para poder conseguir las referencias.
-Sólo falta conclusiones. =)
+Hill Climbing es un algoritmo de búsqueda local, que requiere de una solución inicial, por lo tanto éste depende mucho de la solución 
+inicial encontrada, por lo que al correrlo se necesita correrlo varias veces. \\
+
+Se ha introducido un parámetro \textbf{maxIters} que es el número máximo de iteraciones en el que se deja al algoritmo estar estancado en un óptimo
+local probando aleatoriamente con los distintos movimientos para intentar desestancarlo, si no, se hace un restart, es decir, se parte de una 
+distinta solución inicial, permitiendo al algoritmo explorar más sobre el espacio de búsqueda. \\
+
+El algoritmo depende también de la cantidad de iteraciones en las que es ejecutado, se hizo el experimento 1 para probar dicho parámetro, quedándome 
+con la cantidad que arrojó buenos resultados y no demoró tanto. \\
+
+
+
 
 \bibliographystyle{apalike}
 
