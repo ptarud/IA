@@ -35,7 +35,9 @@ Bibliografía (5\%): & \underline{\hspace{2cm}}\\
 %---------------------------------------------------------------------------%
 
 \begin{abstract}
-Resumen del informe en no más de 10 líneas.
+En el presente trabajo, se estudiará el Traveling Tournament Problem (TTP), para luego analizar el nuevo problema Time Relaxed Tournament Problem (RTTP). Además de 
+ésto se verá lo que se ha hecho hasta ahora, los mejores resultados y técnicas que se han usado hasta ahora para resolver ambos problemas. Luego de ésto se 
+propondrá un algoritmo de búsqueda local llamado Hill Climbing con el fin de resolver el problema RTTP.
 \end{abstract}
 
 \section{Introducción}
@@ -58,7 +60,7 @@ Como se vió anteriormente, existen torneos en los que el número de rondas dispon
 una nueva versión del TTP llamada Time Relaxed Tournament Problem, en ésta versión los equipos tienen rondas libres entre los juegos, éste número de rondas libres es controlado por un parámetro $K$, para el 
 caso particular $K = 0$ corresponde al problema TTP. \\
 
-En el presente trabajo, definiré lo que es TTP, para luego introducir la variante RTTP que es la que me centraré en resolver. Definiré de maneras mas detallada el RTTP, además
+En el presente trabajo, se definirá lo que es TTP, para luego introducir la variante RTTP que es la que se centrará en resolver. Se definirá de maneras mas detallada el RTTP, además
 se verán los mejores resultados conocidos a la fecha en la literatura. \\
 
 Finalmente desarrollaré un algoritmo llamado \emph{Hill Climbing alguna mejora} con el fin de resolver el RTTP, para luego comparar mis resultados con los de la literatura.
@@ -419,7 +421,7 @@ En el presente trabajo usaré \emph{Hill climbing alguna mejora con restarts}. El
     \ENDFOR
     \STATE Imprimir $mejor\_solucion$.
   \end{algorithmic}
-  \caption{Hill Climbing alguna mejora con restarts para RTTP}\label{Algoritmof}
+  \caption{Hill Climbing alguna mejora con restarts para RTTP}\label{Algoritmo}
 \end{algorithm}
 
 \section{Experimentos}
@@ -445,7 +447,7 @@ depende mucho de la solución inicial. Me quedé con la mejor solución encontrada.
 Utilicé los parámetros estándar del problema, K = 1, L = 1, U = 3, B = 3, O = 4., ya que cambiando esos parámetros se resuelve un problema distinto.
 
 \subsection{Experimento 3}
-\subsection{Objectivo}
+\subsection{Objetivo}
 El objetivo de este experimento es conocer el comportamiento del algoritmo luego de haber realizado los experimentos 1 y 2 para la sintonización de parámetros.
 \subsubsection{Experimento}
 Se correrá el algoritmo variando el parámetro K y dejando fijos los parámetros L, U, B, O del problema. Los parámetros iteraciones y maxIters se setearán en 
@@ -543,22 +545,38 @@ Las pruebas se hicieron en un computador con las siguientes características.
 \begin{tabular}[h]{| l | l | l | l | l | }
 \hline
 \textbf{K} & \textbf{Iteraciones} & \textbf{Instancia} & \textbf{maxIters} & \textbf{Resultado} \\ \hline
-0 & 70000 & data8.txt & 30 &  41872 \\ \hline
-1 & 70000 & data8.txt & 30 & 40433 \\ \hline
-2 & 70000 & data8.txt & 30 &  \\ \hline
-3 & 70000 & data8.txt & 30 &  \\ \hline	
+0 & 70000 & data8.txt & 30 &  40743 \\ \hline
+1 & 70000 & data8.txt & 30 &  40433 \\ \hline
+2 & 70000 & data8.txt & 30 &  40238 \\ \hline
+3 & 70000 & data8.txt & 30 &  40123 \\ \hline	
 \end{tabular}
 
 \begin{tabular}[h]{| l | l | l | l | l | }
 \hline
 \textbf{K} & \textbf{Iteraciones} & \textbf{Instancia} & \textbf{maxIters} & \textbf{Resultado} \\ \hline
 0 & 70000 & data10.txt & 30 & 65755 \\ \hline
-1 & 70000 & data10.txt & 30 & 65779 \\ \hline
-2 & 70000 & data10.txt & 30 &  \\ \hline
-3 & 70000 & data10.txt & 30 &  \\ \hline	
+1 & 70000 & data10.txt & 30 & 65755 \\ \hline
+2 & 70000 & data10.txt & 30 & 65521 \\ \hline
+3 & 70000 & data10.txt & 30 & 64291 \\ \hline	
 \end{tabular}
+
 \section{Conclusiones}%REFERENCIAS
 %Indicando toda la información necesaria como para poder conseguir las referencias.
+El Tournament Traveling Problem es un problema muy importante a nivel mundial, ya que hace que las ligas deportivas ahorren mucho dinero y además disminuyen la fatiga
+de los jugadores, por lo que las hace más atractivas para los espectadores. También fomenta la investigación en la programación de ligas deportivas. \\
+
+El Time Relaxed Traveling Tournament Problem es una variante del TTP que agrega un número definido de rondas libres, por lo que éste tipo de problema se puede aplicar a todas 
+las ligas deportivas de Estados Unidos, a diferencia del TTP que se pude aplicar sólo a algunas. \\
+
+Existe otro tipo de problema de programación deportiva que minimiza el número de días libres, que es aplicado a las ligas deportivas europeas, por lo que si la investigación de estos 
+tipos de problemas se podrían mejorar todas las ligas deportivas a nivel mundial. \\
+
+Para TTP los mejores resultados conocidos en la literatura son los que utilizan métodos con post-procesamiento en la búsqueda local (movimientos) y usan métodos incompletos para 
+resolverlo, como \emph{Tabu Search}, \emph{Hill Climbing} y \emph{Simulated Annealing} o una combinación de éstos. \\
+
+Para el RTTP los mejores resultados son los basados en programación entera y programación con restricciones. También los que usan métodos de búsqueda completa para resolver el problema, usando
+Branch and Bound, metaheurísticas y programación dinámica. \\
+
 Hill Climbing es un algoritmo de búsqueda local, que requiere de una solución inicial, por lo tanto éste depende mucho de la solución 
 inicial encontrada, por lo que al correrlo se necesita correrlo varias veces. \\
 
@@ -568,8 +586,6 @@ distinta solución inicial, permitiendo al algoritmo explorar más sobre el espaci
 
 El algoritmo depende también de la cantidad de iteraciones en las que es ejecutado, se hizo el experimento 1 para probar dicho parámetro, quedándome 
 con la cantidad que arrojó buenos resultados y no demoró tanto. \\
-
-
 
 
 \bibliographystyle{apalike}
