@@ -4,9 +4,8 @@ IA
 Time Relaxed Tournament Problem (RTTP) with Hill Climbing
 
 Use mode:
-./ia \<num equipos> <K> <L> <U> <B> <O> <iteraciones> <archivo> <maxIters>
+./ia \<numbers of teams> \<K> \<L> \<U> \<B> \<O> \<iters> \<file> \<maxIters>
 
 Use:
 maxIters = 30
-Iteraciones = 80000
-
+iters = 80000
