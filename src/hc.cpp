@@ -1,6 +1,6 @@
 /* 
  * File:   hc.cpp
- * Author: diepeerk
+ * Author: ptarud
  * 
  * Created on 1 de junio de 2011, 15:41
  */

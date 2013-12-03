@@ -1,6 +1,6 @@
 /* 
  * File:   main.cpp
- * Author: diepeerk
+ * Author: ptarud
  *
  * Created on 31 de mayo de 2011, 15:47
  */

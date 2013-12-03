@@ -1,6 +1,6 @@
 /* 
  * File:   solution.h
- * Author: diepeerk
+ * Author: ptarud
  *
  * Created on 31 de mayo de 2011, 18:31
  */
